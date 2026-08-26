@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>茂偉低碳 · 工商業光伏 25 年投資「五步靈魂拷問」12 頁 PPT 簡報</title>
+<title>茂偉低碳 · 工商業光伏 25 年投資「五步靈魂拷問」PPT 簡報</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
   body {
@@ -17,7 +17,6 @@
     overflow: hidden;
   }
 
-  /* 16:9 Slide Stage */
   #stage-wrap {
     width: 100vw;
     height: 100vh;
@@ -37,7 +36,7 @@
     justify-content: space-between;
     padding: 2.8vw 4.5vw 2.2vw;
     box-shadow: 0 25px 60px rgba(2,6,23,0.9), 0 0 40px rgba(56,189,248,0.15);
-    transition: opacity .25s ease;
+    transition: opacity .2s ease;
   }
 
   /* Header */
@@ -55,9 +54,7 @@
     color: #38bdf8;
     text-transform: uppercase;
   }
-  .slide-tag.ans {
-    color: #34d399;
-  }
+  .slide-tag.ans { color: #34d399; }
   .brand-logo {
     font-size: 1vw;
     font-weight: 600;
@@ -65,7 +62,7 @@
     color: rgba(255,255,255,0.6);
   }
 
-  /* Main Body */
+  /* Body Layouts */
   .slide-body {
     flex: 1;
     display: flex;
@@ -73,74 +70,47 @@
     justify-content: center;
     padding: 0.8vw 0;
   }
-  .slide-title {
-    font-size: 2.1vw;
-    font-weight: 800;
-    line-height: 1.3;
+
+  /* 1. Myth Big Title Style (Image 1) */
+  .myth-title {
+    font-size: 3.2vw;
+    font-weight: 900;
+    line-height: 1.35;
     color: #ffffff;
-    margin-bottom: 0.9vw;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    padding: 1vw 0;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.6);
   }
-  .slide-title.ans-title {
-    color: #34d399;
-  }
-  .slide-context {
-    font-size: 1.15vw;
-    line-height: 1.55;
-    color: rgba(255,255,255,0.85);
-    background: rgba(0,0,0,0.35);
-    border-left: 3px solid #38bdf8;
-    padding: 0.7vw 1.2vw;
-    border-radius: 4px;
-    margin-bottom: 1vw;
-  }
-  .soul-question-box {
-    background: linear-gradient(135deg, rgba(239,68,68,0.18), rgba(15,23,42,0.7));
-    border: 1.5px solid rgba(248,113,113,0.45);
-    border-radius: 8px;
-    padding: 1vw 1.4vw;
-    margin-bottom: 1.1vw;
-  }
-  .soul-label {
-    font-size: 1vw;
-    font-weight: 800;
-    color: #f87171;
-    letter-spacing: 1.5px;
+
+  /* 2. Soul Question Style (Image 2) */
+  .soul-tag-large {
+    font-size: 2.2vw;
+    font-weight: 900;
+    color: #fb923c;
     display: flex;
     align-items: center;
-    gap: 0.4vw;
-    margin-bottom: 0.3vw;
+    gap: 0.5vw;
+    margin-bottom: 1.2vw;
+    text-shadow: 0 0 15px rgba(251,146,60,0.4);
   }
-  .soul-text {
-    font-size: 1.35vw;
+  .soul-card-large {
+    background: linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(30,10,20,0.85) 100%);
+    border: 2px solid #f87171;
+    border-radius: 12px;
+    padding: 2vw 2.5vw;
+    font-size: 1.8vw;
     font-weight: 800;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #ffffff;
+    box-shadow: 0 12px 40px rgba(239,68,68,0.25);
   }
 
-  /* Blank Area */
-  .blank-btn {
-    width: 100%;
-    padding: 1.2vw 1.5vw;
-    background: rgba(0,0,0,0.5);
-    border: 2px dashed rgba(56,189,248,0.6);
-    border-radius: 8px;
-    color: #7dd3fc;
-    font-size: 1.25vw;
-    font-weight: 700;
-    letter-spacing: 2px;
-    cursor: pointer;
-    text-align: center;
-    transition: all .2s;
+  /* 3. Answer Reveal Style */
+  .ans-title {
+    font-size: 2vw;
+    font-weight: 800;
+    color: #34d399;
+    margin-bottom: 1vw;
   }
-  .blank-btn:hover {
-    background: rgba(14,165,233,0.2);
-    border-color: #38bdf8;
-    color: #fff;
-    box-shadow: 0 0 25px rgba(56,189,248,0.35);
-  }
-
-  /* Answer Grid */
   .ans-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -213,31 +183,13 @@
 </div>
 
 <script>
-const SLIDES = [
-  // Slide 0: 封面
+const QUESTIONS_DATA = [
   {
-    type: 'cover',
-    tag: '茂偉低碳 · 工商業決策學院',
-    title: '讀懂光伏電站投資 —— 25 年真算帳',
-    subtitle: '別被「總價便宜」騙了',
-    note: '按 空白鍵 (Space) 或 右方向鍵 (➔) 進入第一頁靈魂拷問'
-  },
-  // Slide 1: 拷問一 · 提問頁
-  {
-    type: 'question',
     tag: '第 01 步 · 材料工程篇',
-    stepNum: '第 1 / 5 題 · 提問頁',
-    title: '「組件、逆變器都用一樣的一線大廠，品質應該差不到哪裡去？」',
-    context: '業主常問：「既然兩份報價單都寫著大廠組件、大廠逆變器，那選總價便宜的施工隊來裝，硬體都一樣，有什麼差別？」',
-    q: '光伏電站是要承受 25 年暴雨強風的高壓精密發電廠——如果只是把大廠零件買齊、找工班在屋頂拼裝，會留下哪些致命隱患？',
-    blankPrompt: '【 ❓ 思考時間 / 答案留白區 】<br><span style="font-size:0.95vw;color:rgba(255,255,255,0.7);font-weight:normal">（長官請思考：省下的差價，會在何處爆發？按空白鍵 ➔ 翻頁揭曉真相）</span>'
-  },
-  // Slide 2: 拷問一 · 揭曉頁
-  {
-    type: 'answer',
-    tag: '第 01 步 · 材料工程篇',
-    stepNum: '第 1 / 5 題 · 揭曉頁',
-    title: '【真相】光伏是「25 年精密系統工程」，絕非買菜煮火鍋隨便拼裝！',
+    num: '第 1 / 5 題',
+    myth: '「組件、逆變器都用一樣的，品質應該差不多？」',
+    soul: '光伏電站是要承受 25 年暴雨強風的高壓精密發電廠——如果只是把大廠零件買齊、找工班在屋頂拼裝，會留下哪些致命隱患？',
+    ansTitle: '【真相】光伏是「25 年精密系統工程」，絕非買零件煮火鍋隨便拼裝！',
     points: [
       { h: '❌ 陷阱 1：組件貓膩', b: '低價施工隊常使用市場上的海退貨、降級 B 規組件充數，外觀看不出差異，但 2~3 年內發電量暴跌 15% 以上！' },
       { h: '❌ 陷阱 2：屋頂穿孔漏水', b: '為省專利夾具成本，直接在彩鋼瓦上「打孔打矽膠」！矽膠 2 年受紫外線老化必開裂滲水，直接毀損廠內昂貴機台與產線！' },
@@ -245,22 +197,12 @@ const SLIDES = [
     ],
     bottom: '🛡️ 茂偉標準：一線原廠 A 規唯一出廠溯源防偽條碼 ＋ 專利鋁鎂鋅無損夾具，承諾 25 年 100% 零漏水！'
   },
-  // Slide 3: 拷問二 · 提問頁
   {
-    type: 'question',
     tag: '第 02 步 · 發電數據篇',
-    stepNum: '第 2 / 5 題 · 提問頁',
-    title: '宣傳冊寫年發電 60 萬度，如何判斷是不是畫大餅？',
-    context: '評估效益時，每家廠商宣傳冊上都印著漂亮的「理論發電量預估表」，業務員口頭承諾「年年大發電」。',
-    q: '要客觀驗證廠商承諾的發電效率究竟能不能兌現，如何只用一張電費單，算出最權威的發電硬指標？',
-    blankPrompt: '【 ❓ 思考時間 / 答案留白區 】<br><span style="font-size:0.95vw;color:rgba(255,255,255,0.7);font-weight:normal">（長官請思考：宣傳手冊承諾能信嗎？按空白鍵 ➔ 翻頁揭曉真相）</span>'
-  },
-  // Slide 4: 拷問二 · 揭曉頁
-  {
-    type: 'answer',
-    tag: '第 02 步 · 發電數據篇',
-    stepNum: '第 2 / 5 題 · 揭曉頁',
-    title: '【真相】查驗周邊電站真實電網帳單，核算「年度有效發電小時數」！',
+    num: '第 2 / 5 題',
+    myth: '「宣傳冊上寫年發電 60 萬度，每家預估應該都差不多？」',
+    soul: '要客觀驗證廠商承諾的發電效率究竟能不能兌現，如何只用一張電費單，算出最權威的發電硬指標？',
+    ansTitle: '【真相】查驗周邊電站真實電網帳單，核算「年度有效發電小時數」！',
     points: [
       { h: '📊 唯一標準：發電有效小時數', b: '計算公式：全年總發電度數 ÷ 裝機容量(kWp)。這是扣除天氣與日照後，最直觀、最容易用電費單核算的硬指標！' },
       { h: '📉 低價劣質系統：約 1,000 小時', b: '次級組件衰減快 ＋ 線損嚴重 ＋ 灰塵遮蔽，500kWp 電站年發僅 50 萬度，25 年累計發電 1,250 萬度。' },
@@ -268,22 +210,12 @@ const SLIDES = [
     ],
     bottom: '💰 算術真相：每年多出 200 小時發電 ＝ 500kWp 電站 25 年整整多為工廠產出 250 萬度電！'
   },
-  // Slide 5: 拷問三 · 提問頁
   {
-    type: 'question',
     tag: '第 03 步 · 併網時程篇',
-    stepNum: '第 3 / 5 題 · 提問頁',
-    title: '簽完約就等著收電費？業主忽視的「併網時間黑洞」',
-    context: '以標準 500kWp 電站為例，平均每月發電約 5.5 萬度（以工商業電價 0.8 元/度計，月產值約 4.4 萬元）。',
-    q: '很多低價施工隊前期不跑供電局審批變壓器容量，設備上屋頂才卡關。若延遲 3 個月才併網，工廠將實質蒸發多少電費？',
-    blankPrompt: '【 ❓ 思考時間 / 答案留白區 】<br><span style="font-size:0.95vw;color:rgba(255,255,255,0.7);font-weight:normal">（長官請思考：延誤幾個月真沒影響嗎？按空白鍵 ➔ 翻頁揭曉真相）</span>'
-  },
-  // Slide 6: 拷問三 · 揭曉頁
-  {
-    type: 'answer',
-    tag: '第 03 步 · 併網時程篇',
-    stepNum: '第 3 / 5 題 · 揭曉頁',
-    title: '【真相】延誤 3 個月白白蒸發 13.2 萬！開工第一天把價差全賠光！',
+    num: '第 3 / 5 題',
+    myth: '「反正設備已經在屋頂施工了，晚幾個月併網也沒什麼差？」',
+    soul: '很多低價施工隊前期不跑供電局審批變壓器容量，設備上屋頂才卡關。若延遲 3 個月才正式併網通電，工廠帳面上將實質蒸發多少電費？',
+    ansTitle: '【真相】延誤 3 個月白白蒸發 13.2 萬！開工第一天把價差全賠光！',
     points: [
       { h: '⏱️ 時間就是真金白銀', b: '500kWp 電站每延誤 1 個月損失 4.4 萬元，延誤 3 個月直接蒸發 13.2 萬，延誤半年損失 26.4 萬！' },
       { h: '⚠️ 供電局絕不賠償', b: '低價 EPC 簽約前不具備電網確信審查能力，變壓器卡關電站淪為屋頂擺設，所有停工損失全由業主承擔！' },
@@ -291,22 +223,12 @@ const SLIDES = [
     ],
     bottom: '🚀 茂偉承諾：簽約前確信審查，承諾即確定時程，2 年實績 100% 如期交付！'
   },
-  // Slide 7: 拷問四 · 提問頁
   {
-    type: 'question',
     tag: '第 04 步 · 運維真相篇',
-    stepNum: '第 4 / 5 題 · 提問頁',
-    title: '每家投標都承諾「質保 25 年」，這話到底能不能信？',
-    context: '25 年質保其實是「組件原廠」給的材料保固，原廠只管出廠缺陷且絕不免費爬屋頂；低價施工隊完工 2~3 年後解散跑路。',
-    q: '第 4 年組件發生熱斑衰減，原廠要求提供「IV 曲線/EL 檢測報告並自行拆卸寄回」，工廠無人無儀器，誰來幫你向原廠出保？',
-    blankPrompt: '【 ❓ 思考時間 / 答案留白區 】<br><span style="font-size:0.95vw;color:rgba(255,255,255,0.7);font-weight:normal">（長官請思考：施工隊跑路後找誰？按空白鍵 ➔ 翻頁揭曉真相）</span>'
-  },
-  // Slide 8: 拷問四 · 揭曉頁
-  {
-    type: 'answer',
-    tag: '第 04 步 · 運維真相篇',
-    stepNum: '第 4 / 5 題 · 揭曉頁',
-    title: '【真相】茂偉自持 15MW 實體電站 ＋ 每年近千萬現金流，真正保障 25 年！',
+    num: '第 4 / 5 題',
+    myth: '「每家 EPC 投標都承諾『質保 25 年』，這話到底能不能信？」',
+    soul: '25 年質保是組件原廠給的材料保固，原廠不包爬屋頂檢測；施工隊幾年後跑路，第 4 年組件衰減時，誰來幫你向原廠出保？',
+    ansTitle: '【真相】茂偉自持 15MW 實體電站 ＋ 每年近千萬現金流，真正保障 25 年！',
     points: [
       { h: '🌞 自持實體電站 15MW', b: '茂偉自身持有並營運多座實體光儲電站，自持容量達 15,000,000 瓦（15MW），自己就是長期電廠業主！' },
       { h: '💰 每年近 1,000 萬現金流', b: '每年擁有將近 10,000,000 元的穩定電費現金流注入，具備源源不絕的資金支撐專職工程運維團隊長青存續！' },
@@ -314,44 +236,46 @@ const SLIDES = [
     ],
     bottom: '🔒 唯一真相：唯有自持電站、具備充沛電費現金流的企業，才能保證 25 年不倒閉、電站不淪為孤兒！'
   },
-  // Slide 9: 拷問五 · 提問頁
   {
-    type: 'question',
     tag: '第 05 步 · LCOE 算帳篇',
-    stepNum: '第 5 / 5 題 · 提問頁',
-    title: '低價 110 萬 vs 專業 120 萬，誰才是真正的高性價比？',
-    context: '500kWp 電站，低價 110 萬（25年維修85萬，累計發電1250萬度）；茂偉 120 萬（25年維修35萬，累計發電1500萬度）。',
-    q: '非貼現 LCOE ＝ 25 年實付總支出 ÷ 25 年累計總發電量。把 25 年的帳一次算透後，唯一的財務結論是？',
-    blankPrompt: '【 ❓ 思考時間 / 答案留白區 】<br><span style="font-size:0.95vw;color:rgba(255,255,255,0.7);font-weight:normal">（長官請思考：省10萬總價 vs 25年真算帳，誰贏？按空白鍵 ➔ 翻頁揭曉真相）</span>'
-  },
-  // Slide 10: 拷問五 · 揭曉頁
-  {
-    type: 'answer',
-    tag: '第 05 步 · LCOE 算帳篇',
-    stepNum: '第 5 / 5 題 · 揭曉頁',
-    title: '【真相】茂偉 25 年總支出反而更便宜（省下 40 萬），度電成本狂降 33.8%！',
+    num: '第 5 / 5 題',
+    myth: '「低價 EPC 總價便宜 10 萬，選便宜的性價比最高？」',
+    soul: '非貼現 LCOE ＝ 25 年實付總支出 ÷ 25 年累計總發電量。把 25 年維修、發電量與度電成本一次算透後，誰才是真便宜？',
+    ansTitle: '【真相】茂偉 25 年總支出反而更便宜（省下 40 萬），度電成本狂降 33.8%！',
     points: [
       { h: '❌ 低價方案（假便宜真燒錢）', b: '初期 110 萬 ＋ 25 年維修 85 萬 ＝ 總支出 195 萬！累計發電 1,250 萬度 ➔ 每度電成本高達 ¥0.1560 元/度！' },
       { h: '✅ 茂偉方案（真省錢高回報）', b: '初期 120 萬 ＋ 25 年運維 35 萬 ＝ 總支出 155 萬！累計發電 1,500 萬度 ➔ 每度電成本僅需 ¥0.1033 元/度！' },
       { h: '🏆 終極財務算術結論', b: '選茂偉 25 年實付總支出反而少掏 40 萬現金！同時多發 250 萬度電，度電成本狂降 33.8%，才是最高性價比！' }
     ],
     bottom: '💡 決策本質：光伏是 25 年生財設備！選茂偉不是買貴，而是 25 年為工廠多賺數百萬現金流！'
-  },
-  // Slide 11: 結語宣誓
-  {
-    type: 'closing',
-    tag: '結語 · 終極決策',
-    stepNum: '結語宣誓',
-    title: '「我不再只盯誰總價便宜了。」',
-    weapons: [
-      '<b>材料工程</b>：一線原廠 A 規防偽 ＋ 專利無損夾具（承諾 25 年 100% 零漏水）',
-      '<b>發電實證</b>：實測年度有效發電超 1,200 小時（25 年為工廠多發 250 萬度電）',
-      '<b>併網時效</b>：簽約前確信審查（60~90 天確定併網通電，防止 13.2 萬蒸發）',
-      '<b>運維閉環</b>：自持 15MW（1500萬瓦）電站 / 年收近千萬現金流（代辦原廠索賠）',
-      '<b>LCOE算帳</b>：非貼現度電成本 0.103 元/度（25 年實付總支出反而省下 40 萬）'
-    ]
   }
 ];
+
+const SLIDES = [
+  { type: 'cover', tag: '茂偉低碳 · 工商業決策學院', title: '讀懂光伏電站投資 —— 25 年真算帳', subtitle: '別被「總價便宜」騙了', note: '按 空白鍵 (Space) 或 右方向鍵 (➔) 進入第一頁' }
+];
+
+QUESTIONS_DATA.forEach((q, idx) => {
+  // Page A: 迷思標題頁 (Image 1 Style)
+  SLIDES.push({ type: 'myth', tag: q.tag, num: q.num, text: q.myth });
+  // Page B: 靈魂拷問頁 (Image 2 Style)
+  SLIDES.push({ type: 'soul', tag: q.tag, num: q.num, text: q.soul });
+  // Page C: 真相揭曉頁
+  SLIDES.push({ type: 'answer', tag: q.tag, num: q.num, title: q.ansTitle, points: q.points, bottom: q.bottom });
+});
+
+SLIDES.push({
+  type: 'closing',
+  tag: '結語 · 終極決策',
+  title: '「我不再只盯誰總價便宜了。」',
+  weapons: [
+    '<b>材料工程</b>：一線原廠 A 規防偽 ＋ 專利無損夾具（承諾 25 年 100% 零漏水）',
+    '<b>發電實證</b>：實測年度有效發電超 1,200 小時（25 年為工廠多發 250 萬度電）',
+    '<b>併網時效</b>：簽約前確信審查（60~90 天確定併網通電，防止 13.2 萬蒸發）',
+    '<b>運維閉環</b>：自持 15MW（1500萬瓦）電站 / 年收近千萬現金流（代辦原廠索賠）',
+    '<b>LCOE算帳</b>：非貼現度電成本 0.103 元/度（25 年實付總支出反而省下 40 萬）'
+  ]
+});
 
 let cur = 0;
 
@@ -372,58 +296,47 @@ function render() {
       </div>
       <div class="slide-footer">
         <span>工商業光伏 25 年資產決策手冊</span>
+        <div class="nav-hints"><button class="nav-btn" onclick="next()">開始 ➔</button></div>
+      </div>
+    `;
+    return;
+  }
+
+  if (s.type === 'myth') {
+    el.innerHTML = `
+      <div class="slide-header">
+        <span class="slide-tag">${s.tag}</span>
+        <span class="brand-logo">MOWINTECH 茂偉低碳</span>
+      </div>
+      <div class="slide-body">
+        <div class="myth-title">${s.text}</div>
+      </div>
+      <div class="slide-footer">
+        <span>${s.num} · 迷思情境</span>
         <div class="nav-hints">
-          <button class="nav-btn" onclick="next()">開始拷問 ➔</button>
+          <button class="nav-btn" onclick="prev()">⬅ 上一頁</button>
+          <button class="nav-btn" onclick="next()">靈魂拷問 ➔</button>
         </div>
       </div>
     `;
     return;
   }
 
-  if (s.type === 'closing') {
+  if (s.type === 'soul') {
     el.innerHTML = `
       <div class="slide-header">
-        <span class="slide-tag ans">${s.tag} · ✅ 決策宣誓</span>
+        <span class="slide-tag">${s.tag}</span>
         <span class="brand-logo">MOWINTECH 茂偉低碳</span>
       </div>
       <div class="slide-body">
-        <div class="slide-title" style="color:#7dd3fc;font-size:2.8vw;text-align:center;margin-bottom:1.5vw;">${s.title}</div>
-        <div style="background:rgba(0,0,0,0.5);border:1.5px solid #38bdf8;border-radius:10px;padding:1.4vw 2vw;box-shadow:0 8px 35px rgba(14,165,233,0.3);">
-          <div style="font-size:1.1vw;font-weight:800;letter-spacing:2px;color:#38bdf8;margin-bottom:0.8vw;">⚡ 5 大決策武器清單：</div>
-          ${s.weapons.map(w => `<div style="font-size:1.18vw;line-height:1.8;color:#f8fafc;margin-bottom:0.3vw;">• ${w}</div>`).join('')}
-        </div>
+        <div class="soul-tag-large">⚡ 靈魂拷問：</div>
+        <div class="soul-card-large">${s.text}</div>
       </div>
       <div class="slide-footer">
-        <span>第 ${cur + 1} / ${SLIDES.length} 頁 · 茂偉低碳 MOWINTECH</span>
+        <span>${s.num} · 靈魂拷問</span>
         <div class="nav-hints">
           <button class="nav-btn" onclick="prev()">⬅ 上一頁</button>
-          <button class="nav-btn" onclick="go(0)">重新放映 ↺</button>
-        </div>
-      </div>
-    `;
-    return;
-  }
-
-  if (s.type === 'question') {
-    el.innerHTML = `
-      <div class="slide-header">
-        <span class="slide-tag">${s.tag} · ⚡ 靈魂拷問</span>
-        <span class="brand-logo">MOWINTECH 茂偉低碳</span>
-      </div>
-      <div class="slide-body">
-        <div class="slide-title">${s.title}</div>
-        <div class="slide-context"><b>情境說明：</b>${s.context}</div>
-        <div class="soul-question-box">
-          <div class="soul-label">⚡ 靈魂拷問：</div>
-          <div class="soul-text">${s.q}</div>
-        </div>
-        <div class="blank-btn" onclick="next()">${s.blankPrompt}</div>
-      </div>
-      <div class="slide-footer">
-        <span>第 ${cur + 1} / ${SLIDES.length} 頁 · ${s.stepNum}</span>
-        <div class="nav-hints">
-          <button class="nav-btn" onclick="prev()">⬅ 上一頁</button>
-          <button class="nav-btn" onclick="next()">翻頁揭曉真相 ➔</button>
+          <button class="nav-btn" onclick="next()">真相揭曉 ➔</button>
         </div>
       </div>
     `;
@@ -437,7 +350,7 @@ function render() {
         <span class="brand-logo">MOWINTECH 茂偉低碳</span>
       </div>
       <div class="slide-body">
-        <div class="slide-title ans-title">${s.title}</div>
+        <div class="ans-title">${s.title}</div>
         <div class="ans-grid">
           ${s.points.map(p => `
             <div class="ans-card">
@@ -449,7 +362,7 @@ function render() {
         <div class="bottom-anchor">${s.bottom}</div>
       </div>
       <div class="slide-footer">
-        <span>第 ${cur + 1} / ${SLIDES.length} 頁 · ${s.stepNum}</span>
+        <span>${s.num} · 揭曉頁</span>
         <div class="nav-hints">
           <button class="nav-btn" onclick="prev()">⬅ 上一頁</button>
           <button class="nav-btn" onclick="next()">下一題 ➔</button>
@@ -458,34 +371,41 @@ function render() {
     `;
     return;
   }
-}
 
-function next() {
-  if (cur < SLIDES.length - 1) {
-    cur++;
-    render();
+  if (s.type === 'closing') {
+    el.innerHTML = `
+      <div class="slide-header">
+        <span class="slide-tag ans">${s.tag} · ✅ 決策宣誓</span>
+        <span class="brand-logo">MOWINTECH 茂偉低碳</span>
+      </div>
+      <div class="slide-body">
+        <div style="color:#7dd3fc;font-size:2.8vw;font-weight:900;text-align:center;margin-bottom:1.5vw;">${s.title}</div>
+        <div style="background:rgba(0,0,0,0.5);border:1.5px solid #38bdf8;border-radius:10px;padding:1.4vw 2vw;box-shadow:0 8px 35px rgba(14,165,233,0.3);">
+          <div style="font-size:1.1vw;font-weight:800;letter-spacing:2px;color:#38bdf8;margin-bottom:0.8vw;">⚡ 5 大決策武器清單：</div>
+          ${s.weapons.map(w => `<div style="font-size:1.18vw;line-height:1.8;color:#f8fafc;margin-bottom:0.3vw;">• ${w}</div>`).join('')}
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>結語宣誓 · 茂偉低碳 MOWINTECH</span>
+        <div class="nav-hints">
+          <button class="nav-btn" onclick="prev()">⬅ 上一頁</button>
+          <button class="nav-btn" onclick="go(0)">重新放映 ↺</button>
+        </div>
+      </div>
+    `;
+    return;
   }
 }
 
-function prev() {
-  if (cur > 0) {
-    cur--;
-    render();
-  }
-}
-
-function go(idx) {
-  cur = idx;
-  render();
-}
+function next() { if (cur < SLIDES.length - 1) { cur++; render(); } }
+function prev() { if (cur > 0) { cur--; render(); } }
+function go(idx) { cur = idx; render(); }
 
 window.addEventListener('keydown', (e) => {
   if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'PageDown' || e.code === 'Enter') {
-    e.preventDefault();
-    next();
+    e.preventDefault(); next();
   } else if (e.code === 'ArrowLeft' || e.code === 'PageUp') {
-    e.preventDefault();
-    prev();
+    e.preventDefault(); prev();
   }
 });
 
