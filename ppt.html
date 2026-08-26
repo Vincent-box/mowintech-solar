@@ -252,22 +252,19 @@ const QUESTIONS_DATA = [
 ];
 
 const SLIDES = [
-  { type: 'cover', tag: '茂偉低碳 · 工商業決策學院', title: '讀懂光伏電站投資 —— 25 年真算帳', subtitle: '別被「總價便宜」騙了', note: '按 空白鍵 (Space) 或 右方向鍵 (➔) 進入第一頁' }
+  { type: 'cover', tag: '茂偉低碳 · 工商業決策學院', title: '讀懂光伏電站投資 —— 25 年真算帳', subtitle: '「一開始省幾萬是假便宜，25 年為公司多賺百萬才是真賺！」', note: '按 空白鍵 (Space) 或 右方向鍵 (➔) 進入第一頁' }
 ];
 
 QUESTIONS_DATA.forEach((q, idx) => {
-  // Page A: 迷思標題頁 (Image 1 Style)
   SLIDES.push({ type: 'myth', tag: q.tag, num: q.num, text: q.myth });
-  // Page B: 靈魂拷問頁 (Image 2 Style)
   SLIDES.push({ type: 'soul', tag: q.tag, num: q.num, text: q.soul });
-  // Page C: 真相揭曉頁
   SLIDES.push({ type: 'answer', tag: q.tag, num: q.num, title: q.ansTitle, points: q.points, bottom: q.bottom });
 });
 
 SLIDES.push({
   type: 'closing',
   tag: '結語 · 終極決策',
-  title: '「我不再只盯誰總價便宜了。」',
+  title: '「一開始省幾萬是假便宜，<br>25 年為公司多賺百萬才是真賺！」',
   weapons: [
     '<b>材料工程</b>：一線原廠 A 規防偽 ＋ 專利無損夾具（承諾 25 年 100% 零漏水）',
     '<b>發電實證</b>：實測年度有效發電超 1,200 小時（25 年為工廠多發 250 萬度電）',
@@ -290,8 +287,8 @@ function render() {
         <span class="brand-logo">MOWINTECH 茂偉低碳</span>
       </div>
       <div class="slide-body" style="text-align:center;align-items:center;">
-        <div style="font-size:3.6vw;font-weight:900;color:#fff;line-height:1.2;margin-bottom:1vw;text-shadow:0 0 30px rgba(56,189,248,0.55);">${s.title}</div>
-        <div style="font-size:2vw;font-weight:800;color:#38bdf8;font-style:italic;margin-bottom:2.5vw;">${s.subtitle}</div>
+        <div style="font-size:3.4vw;font-weight:900;color:#fff;line-height:1.2;margin-bottom:1.2vw;text-shadow:0 0 30px rgba(56,189,248,0.55);">${s.title}</div>
+        <div style="font-size:1.85vw;font-weight:800;color:#38bdf8;font-style:italic;margin-bottom:2.5vw;">${s.subtitle}</div>
         <div style="font-size:1.1vw;color:rgba(255,255,255,0.85);background:rgba(0,0,0,0.45);padding:0.6vw 1.6vw;border-radius:30px;border:1px solid rgba(56,189,248,0.4);">${s.note}</div>
       </div>
       <div class="slide-footer">
@@ -379,10 +376,10 @@ function render() {
         <span class="brand-logo">MOWINTECH 茂偉低碳</span>
       </div>
       <div class="slide-body">
-        <div style="color:#7dd3fc;font-size:2.8vw;font-weight:900;text-align:center;margin-bottom:1.5vw;">${s.title}</div>
-        <div style="background:rgba(0,0,0,0.5);border:1.5px solid #38bdf8;border-radius:10px;padding:1.4vw 2vw;box-shadow:0 8px 35px rgba(14,165,233,0.3);">
+        <div style="color:#7dd3fc;font-size:2.5vw;font-weight:900;text-align:center;line-height:1.4;margin-bottom:1.2vw;">${s.title}</div>
+        <div style="background:rgba(0,0,0,0.5);border:1.5px solid #38bdf8;border-radius:10px;padding:1.2vw 2vw;box-shadow:0 8px 35px rgba(14,165,233,0.3);">
           <div style="font-size:1.1vw;font-weight:800;letter-spacing:2px;color:#38bdf8;margin-bottom:0.8vw;">⚡ 5 大決策武器清單：</div>
-          ${s.weapons.map(w => `<div style="font-size:1.18vw;line-height:1.8;color:#f8fafc;margin-bottom:0.3vw;">• ${w}</div>`).join('')}
+          ${s.weapons.map(w => `<div style="font-size:1.15vw;line-height:1.75;color:#f8fafc;margin-bottom:0.3vw;">• ${w}</div>`).join('')}
         </div>
       </div>
       <div class="slide-footer">
