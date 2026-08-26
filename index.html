@@ -257,51 +257,62 @@ const ROUNDS = [
     ]
   },
 
-  // Round 4: 運維真相篇 (組件廠保固 25 年 vs EPC 跑路無人出保)
+  // Round 4: 運維真相篇 (情境題：25年質保到底能不能信？)
   {
-    type: 'ab', sky: 'sky-valley', bg: 'rooftop', label: '第 04 段 · 運維真相篇', title: '組件廠保固 25 年，EPC 跑路了你找誰出保？',
-    text: '光伏行業最大的認知誤區：<b>25 年質保是「組件原廠」給的，EPC 施工隊根本不保 25 年！</b><br>當第 4 年組件出現隱裂、熱斑發電暴跌時，低價 EPC 早就註銷解散了。<br>原廠要求你提供：<b>IV 特性曲線報告、EL 熱成像數據、自行拆卸並寄回原廠</b>。<br><span class="data-chip">原廠只保材料不包爬屋頂</span><span class="data-chip">需專業 IV / IR 檢測報告</span><span class="data-chip">茂偉代辦原廠索賠</span>'
-      + '<svg viewBox="0 0 300 130" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
-      + '<rect x="15" y="15" width="120" height="95" rx="6" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-dasharray="3 3"/>'
-      + '<text x="75" y="38" fill="#f87171" font-size="10.5" font-weight="bold" text-anchor="middle">❌ 低價 EPC 跑路後</text>'
-      + '<text x="75" y="58" fill="rgba(255,255,255,0.8)" font-size="8.5" text-anchor="middle">原廠：「請提供檢測報告並自拆」</text>'
-      + '<text x="75" y="74" fill="rgba(255,255,255,0.5)" font-size="8" text-anchor="middle">業主無儀器、無人修</text>'
-      + '<text x="75" y="92" fill="#f87171" font-size="8.5" font-weight="bold" text-anchor="middle">➔ 25年質保淪為廢紙</text>'
-      + '<rect x="165" y="15" width="120" height="95" rx="6" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="1.5"/>'
-      + '<text x="225" y="38" fill="#34d399" font-size="10.5" font-weight="bold" text-anchor="middle">✅ 茂偉自持運維閉環</text>'
-      + '<text x="225" y="58" fill="rgba(255,255,255,0.9)" font-size="8.5" text-anchor="middle">無人機 IR 熱成像 + IV 特檢</text>'
-      + '<text x="225" y="74" fill="rgba(255,255,255,0.7)" font-size="8" text-anchor="middle">代辦原廠出保換新</text>'
-      + '<text x="225" y="92" fill="#34d399" font-size="8.5" font-weight="bold" text-anchor="middle">➔ 25年質保真正落地</text>'
+    type: 'ab', sky: 'sky-valley', bg: 'rooftop', label: '第 04 段 · 運維真相篇', title: '每家 EPC 投標都承諾「質保 25 年」，這話到底能不能信？',
+    text: '簽訂光伏 EPC 合約時，業務員常指著宣傳冊上的「25 年超長質保」向業主拍胸脯保證。<br>但許多工廠在電站運轉 3~5 年遇到組件隱裂或衰減故障時，才發現質保責任的巨大斷層。<br><span style="font-size:12px;opacity:.85">（在 25 年的漫長營運週期中，售後檢測與出保責任大有玄機）</span>'
+      + '<svg viewBox="0 0 300 115" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<rect x="20" y="25" width="80" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="60" y="50" fill="#fff" font-size="9" text-anchor="middle">組件出廠</text>'
+      + '<text x="60" y="68" fill="#34d399" font-size="8" text-anchor="middle">原廠 25 年質保</text>'
+      + '<line x1="100" y1="57" x2="135" y2="57" stroke="rgba(255,255,255,0.3)" stroke-dasharray="2 2"/>'
+      + '<rect x="135" y="25" width="65" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="167" y="50" fill="#fff" font-size="9" text-anchor="middle">第 4 年</text>'
+      + '<text x="167" y="68" fill="#fca5a5" font-size="8" text-anchor="middle">發生衰減故障</text>'
+      + '<line x1="200" y1="57" x2="235" y2="57" stroke="rgba(255,255,255,0.3)" stroke-dasharray="2 2"/>'
+      + '<rect x="235" y="25" width="45" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="257" y="50" fill="#fff" font-size="9" text-anchor="middle">誰來出保？</text>'
+      + '<text x="257" y="68" fill="#fcd34d" font-size="8" text-anchor="middle">誰爬屋頂？</text>'
       + '</svg>',
-    q: '工廠如果沒有專職光伏工程師與檢測儀器，當 EPC 倒閉後，原廠 25 年保固會變成？',
+    q: '關於光伏電站「25 年質保」的業界真實情況，以下哪一項敘述最符合實情？',
     choices: [
-      '沒關係，直接打組件原廠客服電話，原廠會免費派人爬上屋頂幫我檢測更換',
-      '看得到吃不到的空頭支票！原廠只管材料，必須依賴像茂偉這樣具備自持資產與專職檢測能力的團隊代辦索賠',
-      '找工廠門口的水電工，花幾百塊就能搞定光伏組件出保'
+      '25 年質保是施工隊承諾全額包修到底的服務，出事直接找施工隊免費上門更換即可',
+      '25 年質保其實是「組件原廠」給的材料保固，原廠不包現場檢測與拆換；若施工隊幾年後解散，業主無力自檢，質保極易淪為空頭支票',
+      '光伏組件永遠不會損壞衰減，25 年內根本不需要任何售後檢測與維護'
     ],
     correct: 1,
     fb: [
-      '天真陷阱！組件原廠只負責產品本身，絕不可能免費派吊車與工程師到工廠爬屋頂排查！',
-      '<b>直擊本質！原廠只認專業檢測數據。</b> 茂偉低碳持有多座實體電站，配備無人機 IR 熱成像與 IV 曲線掃描儀，能第一時間為業主鎖定故障、代辦原廠出保換新，讓 25 年質保真正生效！',
-      '普通水電工沒有光伏高壓證照與專業檢測設備，不但出不了保，還極易引發直流拉弧與安全事故。'
+      '最常見的話術誤區！EPC 施工隊的工程保固通常只有 1~2 年，宣傳冊上的 25 年是組件原廠的材料保固，施工隊根本不包 25 年。',
+      '<b>點破行業最深層真相！</b> 25 年質保是組件原廠給的材料保固，原廠只管產品出廠缺陷，且要求出具專業 IV 曲線與 EL 檢測報告並自行拆卸寄回，絕不免費派人爬屋頂！低價施工隊 2~3 年解散後，業主求助無門，質保直接淪為廢紙。茂偉自身持有多座實體電站，配備無人機 IR 與 IV 特檢設備，專職團隊代辦原廠出保換新，讓 25 年質保真正落地！',
+      '光伏組件在戶外承受高溫、大電流與紫外線，常年運轉必然存在隱裂、熱斑與功率衰減，定期專業檢測不可或缺。'
     ]
   },
 
-  // Round 5: 終極非貼現 LCOE 算帳篇 (生財設備 vs 一次性裝修)
+  // Round 5: 終極非貼現 LCOE 算帳篇 (情境題：誰才是真便宜？)
   {
-    type: 'ab', sky: 'sky-noon', bg: 'rooftop', label: '第 05 段 · LCOE 算帳篇', title: '光伏是生財設備，LCOE 最低才是真性價比',
-    text: '辦公室裝修是一次性消費，光伏電站是<b>連續 25 年印鈔票的微型發電廠</b>！<br><b>非貼現 LCOE ＝ 25 年實付總成本 ÷ 25 年總發電量</b>：<br>• 低價 EPC：110萬 + 85萬維修 ＝ <b>195 萬 / 1250萬度 ＝ 0.156 元/度</b><br>• 茂偉低碳：120萬 + 35萬運維 ＝ <b>155 萬 / 1500萬度 ＝ 0.103 元/度</b><br><span class="data-chip">茂偉總支出少掏 40 萬</span><span class="data-chip">多發 250 萬度電</span><span class="data-chip">度電成本降 33.8%</span>',
-    q: '500kWp 電站低價報 110 萬、茂偉報 120 萬（差 10 萬），算完 25 年帳後結論是？',
+    type: 'ab', sky: 'sky-noon', bg: 'rooftop', label: '第 05 段 · LCOE 算帳篇', title: '低價 110 萬 vs 專業 120 萬，誰才是真正的高性價比？',
+    text: '一座 500kWp 工商業電站，低價 EPC 報 110 萬，茂偉低碳報 120 萬（初始建置看似差 10 萬）。<br>辦公室裝修是一次性消費，而光伏電站是為工廠連續運轉 25 年的微型發電廠。<br><span style="font-size:12px;opacity:.85">（評估生財設備的黃金指標：非貼現 LCOE ＝ 25 年實付總支出 ÷ 25 年累計總發電量）</span>'
+      + '<svg viewBox="0 0 300 110" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<line x1="30" y1="80" x2="270" y2="80" stroke="rgba(255,255,255,0.25)"/>'
+      + '<circle cx="150" cy="80" r="4" fill="#fff"/>'
+      + '<rect x="40" y="30" width="100" height="40" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="90" y="47" fill="#fff" font-size="9" text-anchor="middle">初始建置費 Capex</text>'
+      + '<text x="90" y="61" fill="rgba(255,255,255,0.6)" font-size="8" text-anchor="middle">（只看眼前第一筆）</text>'
+      + '<rect x="160" y="30" width="100" height="40" rx="4" fill="rgba(16,185,129,0.15)" stroke="#34d399"/>'
+      + '<text x="210" y="47" fill="#34d399" font-size="9" font-weight="600" text-anchor="middle">25年實付總成本</text>'
+      + '<text x="210" y="61" fill="#6ee7b7" font-size="8" text-anchor="middle">（建置 + 25年維修）</text>'
+      + '</svg>',
+    q: '若低價方案 25 年維修需 85 萬（發電 1250 萬度）；而茂偉 25 年維修僅 35 萬（發電 1500 萬度），算完這筆帳的結論是？',
     choices: [
-      '低價方案省 10 萬，還是比較划算',
-      '選茂偉 25 年總支出少掏 40 萬、多發 250 萬度電、度電成本狂降 33.8%，才是真正最高性價比！',
-      '25 年太久了，只看第一天'
+      '低價方案初始省 10 萬，不管後續如何依然是低價方案划算',
+      '茂偉方案 25 年實付總支出反而省下 40 萬（155萬 vs 195萬）、多發 250 萬度電、度電成本狂降 33.8%，才是真正的最高性價比！',
+      '兩種方案的 25 年度電成本完全一樣，沒有任何差別'
     ],
     correct: 1,
     fb: [
-      '低價方案後續維修爆增 50 萬，25 年總共要掏 195 萬，每度電成本高達 0.156 元，是最貴的陷阱！',
-      '<b>完全正確！選茂偉不是多花 10 萬，而是 25 年直接幫工廠省下 40 萬實付現金、多賺數百萬發電收益！</b>',
-      '光伏是 25 年生財設備，只看第一天就像買了耗油又常故障的便宜貨車，天天在貼修車費。'
+      '嚴重的短視陷阱！低價方案初始省 10 萬，但後續維修多掏 50 萬，25 年實付高達 195 萬，且少發 250 萬度電，每度電成本高達 0.156 元，是最貴的選擇！',
+      '<b>算術真相大獲全勝！</b> 茂偉方案（120萬 Capex ＋ 35萬運維 ＝ 總支出 155 萬），比低價方案（110萬 ＋ 85萬維修 ＝ 195 萬）少掏 40 萬現金！同時多發 250 萬度電，非貼現 LCOE 僅 0.103 元/度。選茂偉不是多花 10 萬，而是 25 年幫工廠多賺數百萬！',
+      '算數不會騙人：195萬/1250萬度＝0.156元，155萬/1500萬度＝0.103元，兩者度電成本相差 33.8% 以上！'
     ]
   }
 ];
