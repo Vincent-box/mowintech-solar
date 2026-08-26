@@ -322,7 +322,7 @@ const TRANSITIONS = [
   '材料與結構搞懂了。<br>那——發電量到底能不能拿周邊電站的真數據說話？',
   '發電實績看清楚了。<br>那——如果併網手續拖延 3 個月，工廠到底會虧多少錢？',
   '時程帳算明白了。<br>那——如果 25 年質保是組件廠給的，EPC 幾年後倒閉跑路，誰來幫你爬屋頂向原廠出保？',
-  '最後一步：把 25 年的帳一次算透！<br>為什麼說「茂偉雖然建置費貴 10 萬，但 25 年總支出反而便宜 40 萬」？'
+  '最後一步：把 25 年的帳一次算透！<br>為什麼說「茂偉雖然看似總價多一點，但 25 年總支出反而便宜 40 萬」？'
 ];
 
 let state = { idx: -1, score: 0, gv: 50, cls: [] };
@@ -368,7 +368,7 @@ function showStart() {
   G.innerHTML = scene('sky-start', 'rooftop', `
     <div class="chapter-label" style="margin-bottom:1rem">茂偉低碳 MOWINTECH · 工商業決策學院</div>
     <div class="chapter-title t-main" style="font-size:32px;font-weight:200;letter-spacing:1px;margin-bottom:0.4rem">讀懂光伏電站投資</div>
-    <div class="t-sub" style="font-size:14.5px;margin-bottom:0.4rem;font-style:italic">25 年真算帳 —— 別被建置費便宜 10 萬騙了</div>
+    <div class="t-sub" style="font-size:14.5px;margin-bottom:0.4rem;font-style:italic">25 年真算帳 —— 別被「總價便宜」騙了</div>
     <div class="t-label" style="font-size:12px;margin-bottom:2.6rem">約 3 分鐘 · 五步閉環決策 · 數據取自 2026 最新電站實測</div>
     <button class="continue-btn" style="font-size:15px;padding:0.85rem 3.4rem;border-radius:8px;letter-spacing:2px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;font-weight:600" onclick="fade(startOpening)">開始決策診斷 ›</button>`);
 }
@@ -553,7 +553,7 @@ function showResult() {
     <div style="font-size:44px;margin-bottom:0.3rem">⚡</div>
     <div class="chapter-title t-main" style="font-size:24px;margin-bottom:0.2rem">你已完全掌握光伏投資的真算帳</div>
     <div style="font-size:19px;font-weight:800;color:#6ee7b7;margin:0.4rem auto 0.8rem;max-width:440px;text-shadow:0 1px 3px rgba(0,0,0,.6)">
-      「我不再只盯誰初始建置費便宜 10 萬了。」
+      「我不再只盯誰總價便宜了。」
     </div>
     <div class="round-text t-sub" style="font-size:13.5px;line-height:1.8;max-width:480px">
       你剛穿透了 5 大關卡：<br>
