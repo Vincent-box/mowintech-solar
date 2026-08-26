@@ -395,11 +395,19 @@ function renderGauge(i) {
 }
 
 function gaugeDone(i) {
-  const r = ROUNDS[i]; if (r.correct(state.gv)) state.score++;
+  const r = ROUNDS[i];
+  const isOk = r.correct(state.gv);
+  if (isOk) state.score++;
+  
+  const col = isOk ? '#34d399' : '#fcd34d';
+  const actionBtn = isOk
+    ? `<button class="continue-btn" style="border-color:#34d399;color:#6ee7b7" onclick="record(${i})">估算精準，繼續 ›</button>`
+    : `<button class="continue-btn" style="border-color:#f87171;color:#fca5a5" onclick="renderGauge(${i})">估算有偏差，重新調整滑桿 ↺</button>`;
+
   G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}
     <div class="gauge-wrap">${gaugeSVG(state.gv, r.left, r.right)}
-    <div class="feedback" style="margin-top:0.8rem;color:#34d399">${r.fb(state.gv)}</div></div>
-    <button class="continue-btn" onclick="record(${i})">繼續 ›</button>`);
+    <div class="feedback" style="margin-top:0.8rem;color:${col}">${r.fb(state.gv)}</div></div>
+    ${actionBtn}`);
 }
 
 // 二選一 / 三選一 (AB)
@@ -411,11 +419,20 @@ function renderAB(i) {
 }
 
 function abPick(i, k) {
-  const r = ROUNDS[i]; if (k === r.correct) state.score++;
-  const col = k === r.correct ? '#34d399' : '#fcd34d';
+  const r = ROUNDS[i];
+  const isCorrect = (k === r.correct);
+  if (isCorrect) state.score++;
+  
+  const col = isCorrect ? '#34d399' : '#fcd34d';
+  const actionBtn = isCorrect
+    ? `<button class="continue-btn" style="border-color:#34d399;color:#6ee7b7;font-weight:600" onclick="record(${i})">答對了，進入下一題 ›</button>`
+    : `<button class="continue-btn" style="border-color:#f87171;color:#fca5a5;font-weight:600" onclick="renderAB(${i})">選錯了，重新思考再試一次 ↺</button>`;
+
   G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}
-    <div class="feedback" style="color:${col};min-height:auto;font-size:14px">${r.fb[k]}</div>
-    <button class="continue-btn" onclick="record(${i})">繼續 ›</button>`);
+    <div class="feedback" style="color:${col};min-height:auto;font-size:14px;background:rgba(0,0,0,0.3);padding:1rem 1.2rem;border-radius:10px;border:1px solid ${isCorrect?'rgba(52,211,153,0.4)':'rgba(239,68,68,0.4)'}">
+      ${isCorrect ? '<b>✅ 恭喜答對！</b><br>' : '<b>⚠️ 答案不對喔！這是常見的商業陷阱：</b><br>'}${r.fb[k]}
+    </div>
+    ${actionBtn}`);
 }
 
 // 分類題型 (Classify)
