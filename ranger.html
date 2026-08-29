@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>讀懂光伏電站投資（25年資產與LCOE真算帳）· 茂偉低碳 MOWINTECH</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; min-height: 100%;
+      font-family: -apple-system, 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    .scene {
+      width: 100%; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; padding: 3rem 1.5rem;
+    }
+    /* 天空色調 (Yoda 漸層風格) */
+    .sky-start { background: linear-gradient(180deg, #061727 0%, #0c2b3d 45%, #134e4a 100%); }
+    .sky-dawn { background: linear-gradient(180deg, #091e2b, #064e3b 55%, #059669); }
+    .sky-solar { background: linear-gradient(180deg, #0a1f33, #0f4c5c 45%, #e36414); }
+    .sky-noon { background: linear-gradient(180deg, #064e3b, #047857 50%, #10b981); }
+    .sky-valley { background: linear-gradient(180deg, #0f172a, #1e293b 42%, #334155); }
+    .sky-storm { background: linear-gradient(180deg, #0b0f19, #1e1b4b 50%, #4338ca); }
+    .sky-clear { background: linear-gradient(180deg, #062c43, #05668d 44%, #028090 82%, #00a896); }
+    .sky-result { background: linear-gradient(180deg, #061727, #064e3b 42%, #059669); }
+
+    /* 水墨/屋頂幾何剪影 */
+    .ink-bg { position: absolute; bottom: 0; left: 0; width: 100%; height: 160px; pointer-events: none; }
+    .overlay { position: relative; z-index: 10; text-align: center; max-width: 640px; width: 100%; }
+
+    .t-main { color: #f2f5ff; }
+    .t-sub { color: rgba(228, 234, 247, 0.88); }
+    .t-label { color: rgba(205, 214, 236, 0.6); }
+    .sky-dawn .t-main, .sky-start .t-main { color: #fff7e6; }
+    .sky-dawn .t-sub, .sky-start .t-sub { color: rgba(255, 242, 214, 0.85); }
+
+    .chapter-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; color: #34d399; }
+    .chapter-title { font-size: 26px; font-weight: 300; margin-bottom: 1rem; line-height: 1.3; letter-spacing: 0.5px; }
+    .chapter-quote { font-size: 15px; line-height: 1.95; margin-bottom: 2rem; font-style: italic; max-width: 480px; margin: 0 auto 2rem; }
+    .round-text { font-size: 14.5px; line-height: 1.85; margin-bottom: 1.3rem; max-width: 520px; margin: 0 auto 1.3rem; }
+    .round-q { font-size: 16px; font-weight: 500; margin-bottom: 1.3rem; line-height: 1.5; color: #fff; }
+    .transition-quote { font-size: 17px; max-width: 460px; line-height: 2.1; font-style: italic; color: rgba(216, 228, 255, 0.9); margin: 0 auto 1.5rem; }
+
+    .choices { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 480px; margin: 0 auto; }
+    .choice-btn {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #fff;
+      padding: 0.95rem 1.25rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: left;
+      transition: all .2s;
+      backdrop-filter: blur(8px);
+    }
+    .choice-btn:hover {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.7);
+      transform: translateX(4px);
+    }
+
+    .continue-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.85);
+      padding: 0.65rem 2.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13.5px;
+      margin-top: 1.3rem;
+      letter-spacing: 1px;
+      transition: all .2s;
+    }
+    .continue-btn:hover { border-color: #34d399; color: #fff; background: rgba(16, 185, 129, 0.25); }
+
+    .feedback { font-size: 13.5px; line-height: 1.8; max-width: 460px; margin: 0.7rem auto 0; min-height: 42px; text-align: left; }
+
+    /* 儀表滑桿 (Gauge) */
+    .gauge-wrap { max-width: 340px; margin: 0 auto; }
+    input[type=range].gsl {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      background: transparent; height: 22px; margin-top: 0.4rem;
+    }
+    input[type=range].gsl::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      background: #10b981; cursor: pointer; margin-top: -7px; box-shadow: 0 1px 6px rgba(0,0,0,.5); border: 2px solid #fff;
+    }
+    input[type=range].gsl::-webkit-slider-runnable-track {
+      height: 8px; border-radius: 4px; background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+    }
+    .gsl-ends { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 0.3rem; }
+
+    /* 分類 (Classify) */
+    .cls-list { max-width: 480px; margin: 0 auto 0.8rem; display: flex; flex-direction: column; gap: 0.55rem; }
+    .cls-row {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px; padding: 0.55rem 0.75rem; flex-wrap: wrap; text-align: left;
+    }
+    .cls-name { flex: 1; font-size: 13px; color: #fff; line-height: 1.5; min-width: 100%; margin-bottom: 0.35rem; }
+    .cls-btns { display: flex; gap: 0.4rem; width: 100%; }
+    .cls-btn {
+      border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.2); color: #fff;
+      border-radius: 6px; padding: 0.4rem 0.8rem; font-size: 12px; cursor: pointer; transition: all .15s; flex: 1;
+    }
+    .cls-btn.trap.on { background: rgba(239, 68, 68, 0.35); border-color: #ef4444; }
+    .cls-btn.safe.on { background: rgba(16, 185, 129, 0.35); border-color: #10b981; }
+    .cls-row.right { border-color: rgba(52, 211, 153, 0.8); }
+    .cls-row.wrong { border-color: rgba(248, 113, 113, 0.8); }
+
+    /* 進度條與頂部 */
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #10b981, #34d399); transition: width .4s; z-index: 100; }
+    .step-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+    .step-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+    .step-dots i.on { background: #34d399; box-shadow: 0 0 8px #34d399; }
+
+    .data-chip {
+      display: inline-block; background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 6px;
+      padding: 2px 8px; margin: 2px; font-size: 12px; color: #6ee7b7;
+    }
+
+    .yoda-btn {
+      display: inline-block; background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff; padding: 0.85rem 2.2rem; border-radius: 8px; font-size: 14px;
+      cursor: pointer; text-decoration: none; margin: 0.3rem; transition: opacity .2s; font-weight: 600;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); border: none;
+    }
+    .yoda-btn:hover { opacity: .9; }
+    .yoda-btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div id="game"></div>
+
+<script>
+const G = document.getElementById('game'), PB = document.getElementById('progress');
+
+// ===== SVG 背景幾何 (山巒/工廠/光伏陣列屋頂) =====
+const MOTIFS = {
+  farhills: (f, n, l) => `<path d="M0,70 C120,50 220,58 340,44 C460,32 560,52 700,40 C840,30 960,50 1080,42 L1200,46 L1200,120 L0,120Z" fill="${f}"/><path d="M0,86 C160,74 300,82 460,70 C640,58 780,76 940,68 C1060,62 1140,72 1200,70 L1200,120 L0,120Z" fill="${n}"/><path d="M0,70 C120,50 220,58 340,44 C460,32 560,52 700,40 C840,30 960,50 1080,42 L1200,46" fill="none" stroke="${l}" stroke-width="1.4"/>`,
+  rooftop: (f, n, l) => `<path d="M0,90 L200,45 L400,90 L600,45 L800,90 L1000,45 L1200,90 L1200,120 L0,120Z" fill="${f}"/><path d="M0,105 L200,60 L400,105 L600,60 L800,105 L1000,60 L1200,105 L1200,120 L0,120Z" fill="${n}"/><path d="M0,90 L200,45 L400,90 L600,45 L800,90 L1000,45 L1200,90" fill="none" stroke="${l}" stroke-width="1.5" opacity="0.6"/>`,
+  grid: (f, n, l) => `<path d="M0,80 C300,60 600,70 1200,65 L1200,120 L0,120Z" fill="${f}"/><line x1="200" y1="20" x2="200" y2="80" stroke="${l}" stroke-width="2"/><line x1="600" y1="10" x2="600" y2="70" stroke="${l}" stroke-width="2"/><line x1="1000" y1="25" x2="1000" y2="80" stroke="${l}" stroke-width="2"/><path d="M200,20 Q400,45 600,10 Q800,45 1000,25" fill="none" stroke="${l}" stroke-width="1.2" opacity="0.7"/>`
+};
+
+function inkCols(sky) {
+  return ['rgba(16, 185, 129, 0.12)', 'rgba(6, 78, 59, 0.35)', 'rgba(52, 211, 153, 0.45)'];
+}
+
+function bg(type, sky) {
+  const m = MOTIFS[type] || MOTIFS.farhills;
+  const [f, n, l] = inkCols(sky);
+  return `<svg class="ink-bg" viewBox="0 0 1200 120" preserveAspectRatio="none">${m(f, n, l)}</svg>`;
+}
+
+// ===== 開場序言 (Opening) =====
+const OPENING = {
+  sky: 'sky-dawn', bg: 'rooftop', label: '序 · 破除迷思', title: '一堆報價單，你只抓了每瓦幾塊錢',
+  quotes: [
+    '你打開光伏 EPC 報價單——組件規格、逆變器、每瓦單價…<br>你多半只看「誰總價便宜」，然後就想拍板。',
+    '但工商業光伏最容易騙人的，就是<b>只看一次性總價</b>。<br>光伏電站是要為工廠運轉 <b>25 年的微型發電廠</b>——<br>少看 <b>LCOE、發電實績、併網時程與孤兒電站風險</b>，<br>省下的初期差價，會以 <b>5 倍至 10 倍價差的維修費</b> 與漏水停工代價還回去。'
+  ]
+};
+
+// ===== 5 大核心關卡 (5 Rounds) =====
+const ROUNDS = [
+  // Round 1: 材料工程篇 (情境題：兩份報價單差在哪？)
+  {
+    type: 'ab', sky: 'sky-valley', bg: 'rooftop', label: '第 01 段 · 材料工程篇', title: '兩份 500kWp 報價單放在桌上，到底差在哪？',
+    text: '你收到兩份工商業屋頂光伏報價單：<br><b>方案 A</b> 總價便宜，規格表簡略標註「一線高效組件、標準鍍鋅支架」；<br><b>方案 B</b> 標明「一線原廠 A 規唯一出廠防偽條碼、工商業專利無損夾具與結構荷載驗算」。<br><span style="font-size:12px;opacity:.85">（廠房屋頂要承受 25 年暴雨強風，兩者的差距往往隱藏在看不見的細節）</span>'
+      + '<svg viewBox="0 0 300 110" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<rect x="20" y="20" width="115" height="70" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="77" y="45" fill="#fff" font-size="11" font-weight="600" text-anchor="middle">方案 A (低價方案)</text>'
+      + '<text x="77" y="65" fill="rgba(255,255,255,0.7)" font-size="9" text-anchor="middle">總價便宜 · 通用打膠安裝</text>'
+      + '<rect x="165" y="20" width="115" height="70" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="222" y="45" fill="#fff" font-size="11" font-weight="600" text-anchor="middle">方案 B (茂偉標準)</text>'
+      + '<text x="222" y="65" fill="rgba(255,255,255,0.7)" font-size="9" text-anchor="middle">原廠防偽 · 專利無損夾具</text>'
+      + '</svg>',
+    q: '在光伏工程領域，總價便宜的低價方案通常在哪些看不見的地方省成本？',
+    choices: [
+      '選用海退貨/B規次級組件充數 ＋ 屋頂粗暴打孔穿透防水層（埋下熱斑衰減與廠房漏水隱患）',
+      '廠商單純薄利多銷，材料規格與施工工藝跟大廠標準完全一樣無差別',
+      '省在施工隊的管理成本，設備與防水壽命沒有任何影響'
+    ],
+    correct: 0,
+    fb: [
+      '<b>直擊本質！總價便宜的代價是 25 年的隱患。</b> 低價 EPC 常使用次級海退組件（2~3年發電衰減15%以上），且缺乏針對性防水夾具，等暴雨漏水導致廠內設備受損，損失遠超當初省下的差價！茂偉堅持原廠 A 規溯源 ＋ 專利無損夾具，承諾 100% 零漏水。',
+      '商業迷思！光伏硬體成本極為透明，總價便宜絕不可能靠「薄利多銷」填補，必然在組件等級（B規/海退）與防水防腐結構上嚴重縮水。',
+      '光伏是 25 年高壓發電工程，粗暴拼裝與省工省料會在 3~5 年後帶來巨大的維修黑洞。'
+    ]
+  },
+
+  // Round 2: 發電數據篇 (情境題：宣傳冊上的發電量能信嗎？)
+  {
+    type: 'ab', sky: 'sky-solar', bg: 'farhills', label: '第 02 段 · 發電數據篇', title: '宣傳冊寫年發電 60 萬度，如何判斷是不是畫大餅？',
+    text: '評估電站效益時，每家廠商宣傳手冊上都印著漂亮的「理論發電量預估」。<br>但在光伏實務中，最直觀、最容易用電費單直接核算的硬指標是 <b>「年度有效發電小時數」</b>（全年總發電度數 ÷ 裝機容量）。<br><span style="font-size:12px;opacity:.85">（同一個 500kWp 屋頂，1,000 小時/年 與 1,200 小時/年，25 年整整差了 250 萬度電！）</span>'
+      + '<svg viewBox="0 0 280 110" style="width:100%;max-width:260px;margin:0.6rem auto;display:block">'
+      + '<line x1="30" y1="75" x2="250" y2="75" stroke="rgba(255,255,255,0.3)"/>'
+      + '<text x="30" y="95" fill="rgba(255,255,255,0.5)" font-size="8.5">1,000小時 (劣質)</text>'
+      + '<text x="140" y="95" fill="rgba(255,255,255,0.5)" font-size="8.5" text-anchor="middle">1,100小時 (平均)</text>'
+      + '<text x="250" y="95" fill="#34d399" font-size="8.5" text-anchor="end">1,200小時 (茂偉實測)</text>'
+      + '<circle cx="45" cy="75" r="5" fill="#ef4444"/>'
+      + '<circle cx="235" cy="75" r="6" fill="#34d399"/>'
+      + '<text x="140" y="40" fill="#fff" font-size="10" text-anchor="middle">年差 200 小時 = 25 年發電量差距 250 萬度</text>'
+      + '</svg>',
+    q: '要客觀驗證廠商承諾的年度發電小時數究竟能不能兌現，最權威的依據是？',
+    choices: [
+      '查看廠商宣傳手冊上的理論預估表與業務員的口頭保證',
+      '查驗廠商在同氣候周邊電站的「真實電網結算帳單」（用總發電度數 ÷ 裝機容量直接核算真實發電小時數）',
+      '等電站建完併網運轉 3 年後再來對帳看發電量'
+    ],
+    correct: 1,
+    fb: [
+      '口頭承諾無法律效力，許多低價 EPC 採用次級組件且線損嚴重，實測年度有效發電小時數往往不到 1,000 小時。',
+      '<b>對！真實帳單換算出的發電小時數不會騙人。</b> 茂偉出示上海浦東（茂強森）、昆山（茂威）、蘇州（茂昆正）等真實電網結算單，實測年度有效發電小時數常年達 1,200 小時以上（月達成率高於 103%），用周邊真實數據證明 25 年多發 250 萬度電！',
+      '光伏電站一旦建好，發電小時數偏低的發電損失將持續 25 年無法逆轉，簽約前必須以周邊真實帳單核驗。'
+    ]
+  },
+
+  // Round 3: 併網時程篇 (情境計算題：延誤併網的隱形成本)
+  {
+    type: 'ab', sky: 'sky-storm', bg: 'grid', label: '第 03 段 · 併網時程篇', title: '簽完約就等著收電費？許多業主忽視的「併網時間黑洞」',
+    text: '以一座標準 500kWp 工商業電站為例，平均每月發電約 <b>5.5 萬度</b>（以工商業電價 0.8 元/度計）。<br>很多低價施工隊前期不跑供電局審批變壓器容量，等設備裝上屋頂才發現容量卡死，往往延誤 3 到 6 個月才能通電。<br><span style="font-size:12px;opacity:.85">（光伏電站每延遲一天併網，工廠就少拿一天的真實現金流）</span>'
+      + '<svg viewBox="0 0 300 115" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<line x1="20" y1="35" x2="280" y2="35" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>'
+      + '<circle cx="30" cy="35" r="4" fill="#34d399"/>'
+      + '<text x="30" y="20" fill="rgba(255,255,255,0.7)" font-size="8">簽約開工</text>'
+      + '<rect x="100" y="27" width="100" height="16" rx="3" fill="rgba(239,68,68,0.3)" stroke="#ef4444" stroke-dasharray="2 2"/>'
+      + '<text x="150" y="39" fill="#fca5a5" font-size="8" text-anchor="middle">❌ 低價隊卡關延誤 3~6 個月</text>'
+      + '<circle cx="270" cy="35" r="4" fill="#ef4444"/>'
+      + '<text x="270" y="20" fill="#fca5a5" font-size="8" text-anchor="end">遲延併網</text>'
+      + '<line x1="20" y1="85" x2="280" y2="85" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>'
+      + '<circle cx="30" cy="85" r="4" fill="#34d399"/>'
+      + '<rect x="30" y="77" width="120" height="16" rx="3" fill="rgba(16,185,129,0.3)" stroke="#34d399"/>'
+      + '<text x="90" y="89" fill="#6ee7b7" font-size="8" text-anchor="middle">✅ 茂偉 60~90 天確定交付</text>'
+      + '<circle cx="150" cy="85" r="4" fill="#34d399"/>'
+      + '<text x="150" y="70" fill="#34d399" font-size="8" text-anchor="middle">如期併網通電</text>'
+      + '</svg>',
+    q: '一座 500kWp 電站若因電網審查卡關延遲 3 個月才併網，工廠將承受多少實質金錢損失？',
+    choices: [
+      '損失高達 13.2 萬元！直接把低價 EPC 省下的總價價差全部賠光倒貼',
+      '沒什麼損失，只要屋頂設備裝好了，晚幾個月併網也只是少賺幾千塊零頭',
+      '供電局會補償延遲併網期間的電費損失'
+    ],
+    correct: 0,
+    fb: [
+      '<b>算術真相：時間就是真金白銀！</b> 500kWp 電站每月產值約 4.4 萬元，延遲 1 個月虧 4.4 萬，延遲 3 個月直接蒸發 13.2 萬！低價 EPC 雖然表面總價便宜，但只要手續卡關 3 個月，省下的錢在開工第一天就全部賠光倒貼！茂偉簽約前即完成電網審查，2 年所有項目 100% 於 60~90 天內如期併網。',
+      '致命的財務盲點！500kWp 電站每月發電 5.5 萬度（按 0.8 元/度計約 4.4 萬），每拖一個月就是 4 萬多真金白銀溜走，延誤 3 個月直接損失 13 萬以上！',
+      '供電局絕不可能補償施工方的審批延誤。前期不具備電網確信審查能力的廠商，拖延損失只能由業主自行承擔。'
+    ]
+  },
+
+  // Round 4: 運維真相篇 (情境題：25年質保到底能不能信？)
+  {
+    type: 'ab', sky: 'sky-valley', bg: 'rooftop', label: '第 04 段 · 運維真相篇', title: '每家 EPC 投標都承諾「質保 25 年」，這話到底能不能信？',
+    text: '簽訂光伏 EPC 合約時，業務員常指著宣傳冊上的「25 年超長質保」向業主拍胸脯保證。<br>但許多工廠在電站運轉 3~5 年遇到組件隱裂或衰減故障時，才發現質保責任的巨大斷層。<br><span style="font-size:12px;opacity:.85">（在 25 年的漫長營運週期中，售後檢測與出保責任大有玄機）</span>'
+      + '<svg viewBox="0 0 300 115" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<rect x="20" y="25" width="80" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="60" y="50" fill="#fff" font-size="9" text-anchor="middle">組件出廠</text>'
+      + '<text x="60" y="68" fill="#34d399" font-size="8" text-anchor="middle">原廠 25 年質保</text>'
+      + '<line x1="100" y1="57" x2="135" y2="57" stroke="rgba(255,255,255,0.3)" stroke-dasharray="2 2"/>'
+      + '<rect x="135" y="25" width="65" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="167" y="50" fill="#fff" font-size="9" text-anchor="middle">第 4 年</text>'
+      + '<text x="167" y="68" fill="#fca5a5" font-size="8" text-anchor="middle">發生衰減故障</text>'
+      + '<line x1="200" y1="57" x2="235" y2="57" stroke="rgba(255,255,255,0.3)" stroke-dasharray="2 2"/>'
+      + '<rect x="235" y="25" width="45" height="65" rx="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="257" y="50" fill="#fff" font-size="9" text-anchor="middle">誰來出保？</text>'
+      + '<text x="257" y="68" fill="#fcd34d" font-size="8" text-anchor="middle">誰爬屋頂？</text>'
+      + '</svg>',
+    q: '關於光伏電站「25 年質保」的業界真實情況，以下哪一項敘述最符合實情？',
+    choices: [
+      '25 年質保是施工隊承諾全額包修到底的服務，出事直接找施工隊免費上門更換即可',
+      '25 年質保其實是「組件原廠」給的材料保固，原廠不包現場檢測與拆換；若施工隊幾年後解散，業主無力自檢，質保極易淪為空頭支票',
+      '光伏組件永遠不會損壞衰減，25 年內根本不需要任何售後檢測與維護'
+    ],
+    correct: 1,
+    fb: [
+      '最常見的話術誤區！EPC 施工隊的工程保固通常只有 1~2 年，宣傳冊上的 25 年是組件原廠的材料保固，施工隊根本不包 25 年。',
+      '<b>點破行業最深層真相！</b> 25 年質保是組件原廠給的材料保固，原廠只管產品出廠缺陷，且要求出具專業 IV 曲線與 EL 檢測報告並自行拆卸寄回，絕不免費派人爬屋頂！低價施工隊 2~3 年解散後，業主求助無門，質保直接淪為廢紙。<br><br>'
+      + '<div style="margin:1.1rem 0 0.8rem;padding:1.2rem 1rem;background:linear-gradient(135deg,rgba(5,150,105,0.3) 0%,rgba(15,23,42,0.92) 100%);border:2px solid #34d399;border-radius:14px;box-shadow:0 10px 35px rgba(16,185,129,0.35);text-align:center">'
+      + '<div style="font-size:13px;letter-spacing:2px;font-weight:800;color:#6ee7b7;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:0.4rem">'
+      + '<span>⚡ 茂偉低碳 · 25 年長存硬核實力 ⚡</span>'
+      + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:0.75rem;margin-bottom:0.9rem">'
+      + '<div style="background:rgba(0,0,0,0.65);border:1.5px solid rgba(52,211,153,0.8);border-radius:10px;padding:0.9rem 0.4rem;box-shadow:inset 0 0 15px rgba(52,211,153,0.2)">'
+      + '<div style="font-size:12px;color:#a7f3d0;font-weight:700">🌞 自持實體電站</div>'
+      + '<div style="font-size:26px;font-weight:900;color:#ffffff;line-height:1.2;margin:0.35rem 0;text-shadow:0 0 16px rgba(52,211,153,0.8)">15<span style="font-size:14px;color:#34d399"> MW</span></div>'
+      + '<div style="font-size:12px;font-weight:700;color:#34d399">15,000,000 瓦</div>'
+      + '<div style="font-size:10.5px;color:rgba(255,255,255,0.7);margin-top:3px">多座實體自營資產</div>'
+      + '</div>'
+      + '<div style="background:rgba(0,0,0,0.65);border:1.5px solid rgba(245,158,11,0.85);border-radius:10px;padding:0.9rem 0.4rem;box-shadow:inset 0 0 15px rgba(245,158,11,0.2)">'
+      + '<div style="font-size:12px;color:#fde68a;font-weight:700">💰 每年電費收益</div>'
+      + '<div style="font-size:23px;font-weight:900;color:#fbbf24;line-height:1.2;margin:0.35rem 0;text-shadow:0 0 16px rgba(245,158,11,0.8)">¥1,000<span style="font-size:14px"> 萬+</span></div>'
+      + '<div style="font-size:12px;font-weight:700;color:#f59e0b">近千萬穩定現金流</div>'
+      + '<div style="font-size:10.5px;color:rgba(255,255,255,0.7);margin-top:3px">長青存續拒絕跑路</div>'
+      + '</div>'
+      + '<div style="background:rgba(0,0,0,0.65);border:1.5px solid rgba(59,130,246,0.85);border-radius:10px;padding:0.9rem 0.4rem;box-shadow:inset 0 0 15px rgba(59,130,246,0.2)">'
+      + '<div style="font-size:12px;color:#bfdbfe;font-weight:700">🛡️ 專職運維閉環</div>'
+      + '<div style="font-size:26px;font-weight:900;color:#60a5fa;line-height:1.2;margin:0.35rem 0;text-shadow:0 0 16px rgba(59,130,246,0.8)">25<span style="font-size:14px;color:#93c5fd"> 年</span></div>'
+      + '<div style="font-size:12px;font-weight:700;color:#60a5fa">無人機 IR 特檢</div>'
+      + '<div style="font-size:10.5px;color:rgba(255,255,255,0.7);margin-top:3px">代辦原廠出保換新</div>'
+      + '</div>'
+      + '</div>'
+      + '<div style="font-size:13px;line-height:1.7;color:#f8fafc;background:rgba(0,0,0,0.45);padding:0.6rem 0.9rem;border-radius:8px;border-left:3px solid #34d399;text-align:left">'
+      + '<b>【唯一真相】</b> 只有自己就是實體電站業主，擁有充沛電費現金流支撐專職工程團隊，才能確保 25 年不倒閉、不解散、不淪為孤兒電站！'
+      + '</div>'
+      + '</div>',
+      '光伏組件在戶外承受高溫、大電流與紫外線，常年運轉必然存在隱裂、熱斑與功率衰減，定期專業檢測不可或缺。'
+    ]
+  },
+
+  // Round 5: 終極非貼現 LCOE 算帳篇 (情境題：誰才是真便宜？)
+  {
+    type: 'ab', sky: 'sky-noon', bg: 'rooftop', label: '第 05 段 · LCOE 算帳篇', title: '低價 110 萬 vs 專業 120 萬，誰才是真正的高性價比？',
+    text: '一座 500kWp 工商業電站，低價 EPC 報 110 萬，茂偉低碳報 120 萬（低價方案看似總價便宜）。<br>辦公室裝修是一次性消費，而光伏電站是為工廠連續運轉 25 年的微型發電廠。<br><span style="font-size:12px;opacity:.85">（評估生財設備的黃金指標：非貼現 LCOE ＝ 25 年實付總支出 ÷ 25 年累計總發電量）</span>'
+      + '<svg viewBox="0 0 300 110" style="width:100%;max-width:280px;margin:0.6rem auto;display:block">'
+      + '<line x1="30" y1="80" x2="270" y2="80" stroke="rgba(255,255,255,0.25)"/>'
+      + '<circle cx="150" cy="80" r="4" fill="#fff"/>'
+      + '<rect x="40" y="30" width="100" height="40" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)"/>'
+      + '<text x="90" y="47" fill="#fff" font-size="9" text-anchor="middle">初始總價</text>'
+      + '<text x="90" y="61" fill="rgba(255,255,255,0.6)" font-size="8" text-anchor="middle">（只看眼前第一筆）</text>'
+      + '<rect x="160" y="30" width="100" height="40" rx="4" fill="rgba(16,185,129,0.15)" stroke="#34d399"/>'
+      + '<text x="210" y="47" fill="#34d399" font-size="9" font-weight="600" text-anchor="middle">25年實付總成本</text>'
+      + '<text x="210" y="61" fill="#6ee7b7" font-size="8" text-anchor="middle">（建置 + 25年維修）</text>'
+      + '</svg>',
+    q: '若低價方案 25 年維修需 85 萬（發電 1250 萬度）；而茂偉 25 年維修僅 35 萬（發電 1500 萬度），算完這筆帳的結論是？',
+    choices: [
+      '低價方案總價便宜，不管後續如何依然是低價方案划算',
+      '茂偉方案 25 年實付總支出反而省下 40 萬（155萬 vs 195萬）、多發 250 萬度電、度電成本狂降 33.8%，才是真正的最高性價比！',
+      '兩種方案的 25 年度電成本完全一樣，沒有任何差別'
+    ],
+    correct: 1,
+    fb: [
+      '嚴重的短視陷阱！低價方案表面總價便宜，但後續維修多掏 50 萬，25 年實付高達 195 萬，且少發 250 萬度電，每度電成本高達 0.156 元，是最貴的選擇！',
+      '<b>算術真相大獲全勝！</b> 茂偉方案（120萬 Capex ＋ 35萬運維 ＝ 總支出 155 萬），比低價方案（110萬 ＋ 85萬維修 ＝ 195 萬）少掏 40 萬現金！同時多發 250 萬度電，非貼現 LCOE 僅 0.103 元/度。選茂偉不是買貴，而是 25 年幫工廠多賺數百萬！',
+      '算數不會騙人：195萬/1250萬度＝0.156元，155萬/1500萬度＝0.103元，兩者度電成本相差 33.8% 以上！'
+    ]
+  }
+];
+
+// ===== 轉場過渡金句 (Transitions) =====
+const TRANSITIONS = [
+  '材料與結構搞懂了。<br>那——發電量到底能不能拿周邊電站的真數據說話？',
+  '發電實績看清楚了。<br>那——如果併網手續拖延 3 個月，工廠到底會虧多少錢？',
+  '時程帳算明白了。<br>那——如果 25 年質保是組件廠給的，EPC 幾年後倒閉跑路，誰來幫你爬屋頂向原廠出保？',
+  '最後一步：把 25 年的帳一次算透！<br>為什麼說「茂偉雖然看似總價多一點，但 25 年總支出反而更便宜」？'
+];
+
+let state = { idx: -1, score: 0, gv: 50, cls: [] };
+
+// ===== 答案與白話詞庫 (給我答案) =====
+const ANS = [
+  { answer: '堅持一線原廠 A 規防偽溯源 ＋ 專利無損夾具。光伏是 25 年精密發電系統，非粗暴拼裝。', terms: [['原廠 A 規防偽', '出廠唯一條碼可溯源，非海退或 B 規降級面板'], ['專利無損夾具', '金屬屋頂專用夾具，不打孔穿透防水層，抗 12 級強風']] },
+  { answer: '茂偉周邊真實電站年度有效發電小時數達 1,200 小時，25 年多發 250 萬度電。', terms: [['年度有效發電小時數', '全年總發電度數 ÷ 裝機容量(kWp)，最直觀、最容易用電費單直接核算的發電效率金標準'], ['自發自用消納率', '工廠內部直接消耗光伏電的比例（96%~99%），收益是上網的 2.5 倍']] },
+  { answer: '延誤 3 個月直接蒸發 13.2 萬元電費！茂偉簽約前確信審查，承諾即確定時程。', terms: [['併網延誤損失', '每延誤 1 個月損失 4.4 萬元，3 個月把 EPC 差價賠光'], ['確信併網審查', '簽約前完成變壓器容量與電網驗算，不卡關']] },
+  { answer: '25 年質保是組件原廠給的！原廠只管材料且要求檢測數據，必須依賴茂偉自持運維團隊代辦出保與更換，質保才不會淪為廢紙。', terms: [['組件 25 年質保', '原廠承諾 25 年線性功率，但不包現場排查、吊裝與拆卸更換'], ['代辦原廠索賠', '茂偉出具無人機 IR 熱成像與 IV 專業報告，代業主直接向原廠免費出保換新']] },
+  { answer: '非貼現 LCOE 僅 0.103 元/度，25 年總支出反而省下 40 萬（155萬 vs 195萬）！', terms: [['非貼現 LCOE', '25年累計總支出 ÷ 25年累計總發電量，最直觀的度電成本'], ['生財設備本質', '持續產生現金流的發電資產，而非一次性消耗裝修']] }
+];
+
+function giveAnswer(i) {
+  const r = ROUNDS[i], a = ANS[i];
+  const gloss = `<div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.5);margin:0.85rem 0 0.5rem">名詞白話</div>`
+    + a.terms.map(t => `<div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.9);margin-bottom:0.42rem;text-align:left"><b style="color:#34d399">${t[0]}</b>：${t[1]}</div>`).join('');
+  const box = inner => `<div style="max-width:480px;margin:0.5rem auto 0;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.28);border-radius:10px;padding:1rem 1.2rem;backdrop-filter:blur(8px)">${inner}</div>`;
+  const ansLine = `<div style="font-size:14px;line-height:1.7;color:#fff;text-align:left"><b style="color:#34d399">答案：</b>${a.answer}</div>`;
+
+  if (r.type === 'classify') {
+    r.items.forEach((it, k) => state.cls[k] = it[1]);
+    const rows = r.items.map(it => `<div class="cls-row right"><div class="cls-name">${it[0]}</div><div class="cls-btns"><button class="cls-btn ${it[1]} on" disabled>${it[1]==='atk'?r.catA:r.catB}</button></div></div>`).join('');
+    G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="round-q t-main">${r.q}</div><div class="cls-list">${rows}</div>${box(ansLine + `<div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.86);margin-top:0.55rem;text-align:left">${r.reveal}</div>` + gloss)}<button class="continue-btn" onclick="record(${i})">懂了，繼續 ›</button>`);
+  } else if (r.type === 'gauge') {
+    G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="gauge-wrap">${gaugeSVG(r.ans, r.left, r.right)}<div class="feedback" style="margin-top:0.6rem">${r.fb(r.ans)}</div></div>${box(ansLine + gloss)}<button class="continue-btn" onclick="record(${i})">懂了，繼續 ›</button>`);
+  } else {
+    const ch = r.choices.map((c, k) => `<div class="choice-btn" style="cursor:default;${k===r.correct?'border-color:#34d399;background:rgba(16,185,129,0.25)':'opacity:0.45'}">${k===r.correct?'✓ ':''}${c}</div>`).join('');
+    G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="choices">${ch}</div><div class="feedback" style="color:#34d399;min-height:auto;font-size:14px">${r.fb[r.correct]}</div>${box(gloss)}<button class="continue-btn" onclick="record(${i})">懂了，繼續 ›</button>`);
+  }
+}
+
+function prog() { PB.style.width = (Math.max(0, state.idx + 1) / ROUNDS.length * 100) + '%'; }
+function dots(i) { return `<div class="step-dots">${ROUNDS.map((_, k) => `<i class="${k <= i ? 'on' : ''}"></i>`).join('')}</div>`; }
+function fade(fn) { G.style.transition = 'opacity .28s'; G.style.opacity = '0'; setTimeout(() => { fn(); G.style.opacity = '1'; }, 290); }
+function scene(sky, bgtype, inner) { return `<div class="scene ${sky}">${bg(bgtype, sky)}<div class="overlay">${inner}</div></div>`; }
+
+function head(r) {
+  return `<div class="chapter-label">${r.label}</div><div class="chapter-title t-main">${r.title}</div><div class="round-text t-sub">${r.text}</div>`;
+}
+
+function showStart() {
+  G.innerHTML = scene('sky-start', 'rooftop', `
+    <div class="chapter-label" style="margin-bottom:1rem">茂偉低碳 MOWINTECH · 工商業決策學院</div>
+    <div class="chapter-title t-main" style="font-size:32px;font-weight:200;letter-spacing:1px;margin-bottom:0.4rem">讀懂光伏電站投資</div>
+    <div class="t-sub" style="font-size:14.5px;margin-bottom:0.4rem;font-style:italic">25 年真算帳 —— 別被「總價便宜」騙了</div>
+    <div class="t-label" style="font-size:12px;margin-bottom:2.6rem">約 3 分鐘 · 五步閉環決策 · 數據取自 2026 最新電站實測</div>
+    <button class="continue-btn" style="font-size:15px;padding:0.85rem 3.4rem;border-radius:8px;letter-spacing:2px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;font-weight:600" onclick="fade(startOpening)">開始決策診斷 ›</button>`);
+}
+
+let oi = 0;
+function startOpening() { oi = 0; renderOpening(); }
+function renderOpening() {
+  const q = OPENING.quotes[oi], last = oi >= OPENING.quotes.length - 1;
+  G.innerHTML = scene(OPENING.sky, OPENING.bg, `
+    <div class="chapter-label">${OPENING.label}</div>
+    <div class="chapter-title t-main">${OPENING.title}</div>
+    <div class="chapter-quote t-sub">${q}</div>
+    <button class="continue-btn" onclick="nextOpening()">${last ? '開始第一關 ›' : '繼續 ›'}</button>`);
+}
+function nextOpening() {
+  oi++;
+  if (oi >= OPENING.quotes.length) fade(() => showRound(0));
+  else fade(renderOpening);
+}
+
+function showRound(i) {
+  state.idx = i; prog(); const r = ROUNDS[i];
+  if (r.type === 'gauge') renderGauge(i);
+  else if (r.type === 'classify') renderClassify(i);
+  else renderAB(i);
+}
+
+// 儀表滑桿 (Gauge SVG)
+function gaugeSVG(val, leftLbl, rightLbl) {
+  const min = 0, max = 100, f = v => Math.PI * (1 - (v - min) / (max - min)), R = 120, ax = 250 + R * Math.cos(f(val)), ay = 170 - R * Math.sin(f(val));
+  return `<svg viewBox="0 0 500 200" style="width:100%;max-width:320px">
+    <path d="M130,170 A120,120 0 0,1 370,170" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="14"/>
+    <line x1="250" y1="170" x2="${ax}" y2="${ay}" stroke="#34d399" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="250" cy="170" r="9" fill="#10b981"/>
+    <text x="250" y="128" fill="#fff" font-size="24" font-weight="600" text-anchor="middle">延遲約 3 個月</text>
+    <text x="130" y="192" fill="#34d399" font-size="11" text-anchor="middle">${leftLbl}</text>
+    <text x="370" y="192" fill="#f87171" font-size="11" text-anchor="middle">${rightLbl}</text>
+  </svg>`;
+}
+
+function renderGauge(i) {
+  const r = ROUNDS[i]; state.gv = 50;
+  function draw() {
+    G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="round-q t-main">${r.q}</div>
+      <div class="gauge-wrap">${gaugeSVG(state.gv, r.left, r.right)}
+      <input type="range" class="gsl" min="0" max="100" value="${state.gv}" oninput="state.gv=parseInt(this.value);drawGauge()">
+      <div class="gsl-ends"><span>${r.left}</span><span>${r.right}</span></div></div>
+      <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem">
+        <button class="continue-btn" onclick="gaugeDone(${i})">確認評估 ›</button>
+        <button class="continue-btn" style="opacity:0.72" onclick="giveAnswer(${i})">看解析</button>
+      </div>`);
+  }
+  window.drawGauge = draw; draw();
+}
+
+function gaugeDone(i) {
+  const r = ROUNDS[i];
+  const isOk = r.correct(state.gv);
+  if (isOk) state.score++;
+  
+  const col = isOk ? '#34d399' : '#fcd34d';
+  const actionBtn = isOk
+    ? `<button class="continue-btn" style="border-color:#34d399;color:#6ee7b7" onclick="record(${i})">估算精準，繼續 ›</button>`
+    : `<button class="continue-btn" style="border-color:#f87171;color:#fca5a5" onclick="renderGauge(${i})">估算有偏差，重新調整滑桿 ↺</button>`;
+
+  G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}
+    <div class="gauge-wrap">${gaugeSVG(state.gv, r.left, r.right)}
+    <div class="feedback" style="margin-top:0.8rem;color:${col}">${r.fb(state.gv)}</div></div>
+    ${actionBtn}`);
+}
+
+// 二選一 / 三選一 (AB)
+function renderAB(i) {
+  const r = ROUNDS[i];
+  G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="round-q t-main">${r.q}</div>
+    <div class="choices">${r.choices.map((c, k) => `<button class="choice-btn" onclick="abPick(${i},${k})">${c}</button>`).join('')}</div>
+    <button class="continue-btn" style="opacity:0.72" onclick="giveAnswer(${i})">看解析</button>`);
+}
+
+function abPick(i, k) {
+  const r = ROUNDS[i];
+  const isCorrect = (k === r.correct);
+  if (isCorrect) state.score++;
+  
+  const col = isCorrect ? '#34d399' : '#fcd34d';
+  const actionBtn = isCorrect
+    ? `<button class="continue-btn" style="border-color:#34d399;color:#6ee7b7;font-weight:600" onclick="record(${i})">答對了，進入下一題 ›</button>`
+    : `<button class="continue-btn" style="border-color:#f87171;color:#fca5a5;font-weight:600" onclick="renderAB(${i})">選錯了，重新思考再試一次 ↺</button>`;
+
+  G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}
+    <div class="feedback" style="color:${col};min-height:auto;font-size:14px;background:rgba(0,0,0,0.3);padding:1rem 1.2rem;border-radius:10px;border:1px solid ${isCorrect?'rgba(52,211,153,0.4)':'rgba(239,68,68,0.4)'}">
+      ${isCorrect ? '<b>✅ 恭喜答對！</b><br>' : '<b>⚠️ 答案不對喔！這是常見的商業陷阱：</b><br>'}${r.fb[k]}
+    </div>
+    ${actionBtn}`);
+}
+
+// 分類題型 (Classify)
+function renderClassify(i) {
+  const r = ROUNDS[i];
+  if (state.cls.length !== r.items.length) state.cls = r.items.map(() => null);
+  function draw() {
+    const rows = r.items.map((it, k) => `<div class="cls-row" id="cr${k}">
+      <div class="cls-name">${it[0]}</div>
+      <div class="cls-btns">
+        <button class="cls-btn trap ${state.cls[k]==='atk'?'on':''}" onclick="setCls(${k},'atk')">${r.catA}</button>
+        <button class="cls-btn safe ${state.cls[k]==='def'?'on':''}" onclick="setCls(${k},'def')">${r.catB}</button>
+      </div></div>`).join('');
+    const done = state.cls.every(x => x !== null);
+    G.innerHTML = scene(r.sky, r.bg, `${dots(i)}${head(r)}<div class="round-q t-main">${r.q}</div>
+      <div class="cls-list">${rows}</div>
+      <div class="feedback" id="fbc" style="min-height:24px"></div>
+      <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap">
+        ${done ? `<button class="continue-btn" onclick="clsCheck(${i})">檢查判斷</button>` : ''}
+        <button class="continue-btn" style="opacity:0.72" onclick="giveAnswer(${i})">看解析</button>
+      </div>`);
+  }
+  window.drawCls = draw; draw();
+}
+
+function setCls(k, v) { state.cls[k] = v; window.drawCls(); }
+function clsCheck(i) {
+  const r = ROUNDS[i]; let ok = 0;
+  r.items.forEach((it, k) => {
+    const row = document.getElementById('cr' + k);
+    const right = state.cls[k] === it[1];
+    if (right) ok++;
+    row.classList.add(right ? 'right' : 'wrong');
+  });
+  if (ok >= r.items.length - 1) state.score++;
+  document.getElementById('fbc').innerHTML = `<span style="color:${ok===r.items.length?'#34d399':'#fcd34d'}">正確判斷 ${ok}/${r.items.length}。${r.reveal}</span>`;
+  const cb = G.querySelector('.continue-btn');
+  if (cb) cb.parentElement.outerHTML = `<button class="continue-btn" onclick="record(${i})">繼續 ›</button>`;
+}
+
+function record(i) {
+  const t = TRANSITIONS[i];
+  if (t) fade(() => showTrans(t, i));
+  else advance(i);
+}
+
+function showTrans(txt, i) {
+  G.innerHTML = `<div class="scene" style="background:linear-gradient(180deg,#061727,#064e3b 55%,#047857);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem">
+    <div class="overlay">
+      <div class="transition-quote">${txt}</div>
+      <button class="continue-btn" onclick="advance(${i})">繼續 ›</button>
+    </div></div>`;
+}
+
+function advance(i) {
+  const n = i + 1;
+  if (n >= ROUNDS.length) fade(showResult);
+  else fade(() => showRound(n));
+}
+
+// ===== 結果頁「五大決策武器工具牆」 =====
+const TOOLBOX = [
+  ['A規防偽無損夾具', '<svg viewBox="0 0 100 84"><rect x="15" y="15" width="70" height="54" rx="5" fill="rgba(16,185,129,0.2)" stroke="#34d399" stroke-width="1.5"/><line x1="15" y1="42" x2="85" y2="42" stroke="#34d399" stroke-width="1"/><line x1="50" y1="15" x2="50" y2="69" stroke="#34d399" stroke-width="1"/><circle cx="50" cy="42" r="6" fill="#10b981"/></svg>'],
+  ['周邊真實發電數據', '<svg viewBox="0 0 100 84"><rect x="18" y="42" width="16" height="30" fill="rgba(255,255,255,0.3)"/><rect x="42" y="28" width="16" height="44" fill="rgba(255,255,255,0.5)"/><rect x="66" y="14" width="16" height="58" fill="#34d399"/></svg>'],
+  ['確信如期併網保障', '<svg viewBox="0 0 100 84"><circle cx="50" cy="42" r="28" fill="none" stroke="#34d399" stroke-width="2"/><line x1="50" y1="42" x2="50" y2="24" stroke="#fff" stroke-width="2"/><line x1="50" y1="42" x2="66" y2="42" stroke="#34d399" stroke-width="2"/></svg>'],
+  ['自持運維代出保', '<svg viewBox="0 0 100 84"><path d="M50,16 L80,34 L80,66 L50,80 L20,66 L20,34 Z" fill="rgba(16,185,129,0.25)" stroke="#34d399" stroke-width="1.5"/><path d="M36,44 L46,54 L66,34" fill="none" stroke="#fff" stroke-width="2"/></svg>'],
+  ['非貼現 LCOE 0.103元', '<svg viewBox="0 0 100 84"><text x="50" y="48" fill="#34d399" font-size="16" font-weight="bold" text-anchor="middle">¥0.103</text><text x="50" y="65" fill="rgba(255,255,255,0.6)" font-size="8" text-anchor="middle">省40萬/多發250萬度</text></svg>']
+];
+
+function toolboxHTML() {
+  return '<div style="max-width:440px;margin:0.8rem auto 1.5rem">'
+    + '<div class="t-label" style="font-size:11px;letter-spacing:2px;margin-bottom:0.4rem;color:#34d399">你現在手上的 5 件決策武器</div>'
+    + '<div class="t-sub" style="font-size:12.5px;margin-bottom:0.8rem;opacity:0.85">同一張光伏報價單，你已經具備穿透 25 年真相的判斷力</div>'
+    + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem">'
+    + TOOLBOX.map(t => '<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.14);border-radius:9px;padding:0.45rem 0.3rem">'
+      + '<div style="width:100%;max-width:70px;margin:0 auto">' + t[1] + '</div>'
+      + '<div style="font-size:10.5px;color:rgba(255,255,255,0.85);margin-top:0.2rem;line-height:1.3">' + t[0] + '</div></div>').join('')
+    + '</div></div>';
+}
+
+function showResult() {
+  PB.style.width = '100%';
+  const s = state.score, mx = ROUNDS.length;
+  const tier = s >= 4 ? '資深工商業決策專家' : '明智決策者';
+
+  G.innerHTML = scene('sky-result', 'rooftop', `
+    <div class="chapter-label" style="margin-bottom:0.6rem">診斷通關 · 25 年決策完成</div>
+    <div style="font-size:44px;margin-bottom:0.3rem">⚡</div>
+    <div class="chapter-title t-main" style="font-size:24px;margin-bottom:0.2rem">你已完全掌握光伏投資的真算帳</div>
+    <div style="font-size:19px;font-weight:800;color:#6ee7b7;margin:0.4rem auto 0.8rem;max-width:440px;text-shadow:0 1px 3px rgba(0,0,0,.6)">
+      「一開始省幾萬是假便宜，25 年為公司多賺百萬才是真賺！」
+    </div>
+    <div class="round-text t-sub" style="font-size:13.5px;line-height:1.8;max-width:480px">
+      你剛穿透了 5 大關卡：<br>
+      <b>材料系統工程 → 周邊發電實證 → 併網時效防延誤 → 自持運維代出保 (抗孤兒電站) → 非貼現 LCOE (0.103元/度)</b>。<br><br>
+      <b>終極結論</b>：茂偉 120 萬 vs 低價 110 萬，25 年實付總成本<b>反而省下 40 萬</b>（155萬 vs 195萬），多發 <b>250 萬度電</b>，度電成本<b>狂降 33.8%</b>！<br><br>
+      決策評估得分：<b>${s} / ${mx}（${tier}）</b>
+    </div>
+    ${toolboxHTML()}
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.65rem;max-width:360px;margin:0 auto">
+      <button class="yoda-btn" style="width:100%;box-sizing:border-box;margin:0" onclick="restart()">重新測驗一次 ↺</button>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:1.5rem">茂偉低碳 MOWINTECH · 25 年工商業光伏與儲能資產運營專家</div>`);
+}
+
+function restart() {
+  state = { idx: -1, score: 0, gv: 50, cls: [] };
+  oi = 0; PB.style.width = '0%';
+  fade(showStart);
+}
+
+// Global Exports
+['startOpening', 'nextOpening', 'showRound', 'renderGauge', 'gaugeDone', 'setCls', 'clsCheck', 'giveAnswer', 'abPick', 'record', 'advance', 'showResult', 'restart', 'fade', 'renderClassify', 'renderAB'].forEach(n => window[n] = eval(n));
+window.state = state;
+
+showStart();
+</script>
+</body>
+</html>
