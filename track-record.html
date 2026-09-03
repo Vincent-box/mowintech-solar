@@ -48,7 +48,7 @@
     align-items: stretch;
   }
 
-  /* Compact 4 Columns Grid - Centered & Tight Gap */
+  /* Compact 4 Columns Grid */
   .main-grid {
     display: grid;
     grid-template-columns: repeat(4, 210px);
@@ -84,7 +84,7 @@
     color: #64748b;
   }
 
-  /* Company List - Retain 15px Font Size */
+  /* Company List */
   .company-list {
     list-style: none;
     display: flex;
@@ -92,6 +92,14 @@
     gap: 6px;
     flex: 1;
     justify-content: space-between;
+  }
+
+  /* Shanghai & Anhui list with relaxed spacing */
+  .company-list-relaxed {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
   }
 
   .company-item {
@@ -154,13 +162,13 @@
     color: #b91c1c;
     border-bottom: 2px solid #cbd5e1;
     padding-bottom: 4px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  /* Footer - Centered to match grid width */
+  /* Footer */
   .footer {
     display: flex;
     justify-content: space-between;
@@ -276,7 +284,7 @@
         </ul>
       </div>
 
-      <!-- Column 4: 上海 ＆ 安徽 (11 家) -->
+      <!-- Column 4: 上海 ＆ 安徽 (11 家 - 放鬆間隔) -->
       <div class="col-box" style="justify-content: space-between;">
         
         <!-- 上海 (8 家) -->
@@ -285,7 +293,7 @@
             <span>上海</span>
             <span class="region-count">8 家</span>
           </div>
-          <ul class="company-list" style="gap: 5.5px;">
+          <ul class="company-list-relaxed">
             <li class="company-item"><span class="company-name">尖點科技<span class="star">*</span></span><span class="badge-listed">上市</span></li>
             <li class="company-item"><span class="company-name">克麗緹娜</span><span class="badge-listed">上市</span></li>
             <li class="company-item"><span class="company-name">莘宇豐硅材<span class="star">*</span></span></li>
@@ -298,12 +306,12 @@
         </div>
 
         <!-- 安徽 (3 家) -->
-        <div style="border-top: 1.5px solid #cbd5e1; padding-top: 6px; margin-top: 4px;">
+        <div style="border-top: 1.5px solid #cbd5e1; padding-top: 10px; margin-top: 6px;">
           <div class="sub-region-title">
             <span>安徽</span>
             <span class="region-count">3 家</span>
           </div>
-          <ul class="company-list" style="gap: 5.5px;">
+          <ul class="company-list-relaxed">
             <li class="company-item"><span class="company-name">唐盛國際<span class="star">*</span></span></li>
             <li class="company-item"><span class="company-name">安徽長亨表面處理</span><span class="badge-amber">建設中</span></li>
             <li class="company-item"><span class="company-name">安徽愛粵新材料</span><span class="badge-purple">設計中</span></li>
