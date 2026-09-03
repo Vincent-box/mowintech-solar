@@ -26,18 +26,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 32px 40px 24px;
+    padding: 34px 44px 26px;
     overflow: hidden;
   }
 
   /* Header */
   .title {
-    font-size: 34px;
+    font-size: 36px;
     font-weight: 900;
     color: #0d9488;
     letter-spacing: -0.5px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   /* Center Wrapper */
@@ -51,8 +51,8 @@
   /* Compact 4 Columns Grid */
   .main-grid {
     display: grid;
-    grid-template-columns: repeat(4, 215px);
-    gap: 12px;
+    grid-template-columns: repeat(4, 240px);
+    gap: 14px;
     width: fit-content;
     margin: 0 auto;
     align-items: stretch;
@@ -61,47 +61,47 @@
   .col-box {
     background: #f8fafc;
     border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 10px 12px;
+    border-radius: 9px;
+    padding: 12px 14px;
     display: flex;
     flex-direction: column;
   }
 
   .region-header {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 900;
     color: #b91c1c;
     border-bottom: 2px solid #cbd5e1;
-    padding-bottom: 4px;
+    padding-bottom: 5px;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   .region-count {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: #64748b;
   }
 
-  /* Company List - Tightly Packed */
+  /* Company List */
   .company-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 6.5px;
     flex: 1;
     justify-content: space-between;
   }
 
   .company-item {
-    font-size: 13.5px;
+    font-size: 15px;
     font-weight: 700;
     color: #1e293b;
     display: flex;
     align-items: center;
-    gap: 5px;
-    line-height: 1.2;
+    gap: 6px;
+    line-height: 1.25;
     white-space: nowrap;
   }
 
@@ -115,14 +115,14 @@
     margin-left: 1px;
   }
 
-  /* Compact Badges Directly Beside Name */
+  /* Tags */
   .badge-listed {
     background: #eff6ff;
     color: #1d4ed8;
     border: 1px solid #bfdbfe;
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 800;
-    padding: 0.5px 4px;
+    padding: 1px 5px;
     border-radius: 3px;
     flex-shrink: 0;
   }
@@ -130,9 +130,9 @@
     background: #fffbeb;
     color: #b45309;
     border: 1px solid #fde68a;
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 800;
-    padding: 0.5px 4px;
+    padding: 1px 5px;
     border-radius: 3px;
     flex-shrink: 0;
   }
@@ -140,20 +140,20 @@
     background: #f5f3ff;
     color: #6d28d9;
     border: 1px solid #ddd6fe;
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 800;
-    padding: 0.5px 4px;
+    padding: 1px 5px;
     border-radius: 3px;
     flex-shrink: 0;
   }
 
   /* Sub Region for Col 4 */
   .sub-region-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 900;
     color: #b91c1c;
     border-bottom: 2px solid #cbd5e1;
-    padding-bottom: 4px;
+    padding-bottom: 5px;
     margin-bottom: 6px;
     display: flex;
     align-items: center;
@@ -166,15 +166,15 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1.5px solid #e2e8f0;
-    padding-top: 10px;
-    margin-top: 12px;
-    max-width: 896px;
+    padding-top: 12px;
+    margin-top: 14px;
+    max-width: 1002px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
   .footer-note {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #0d9488;
   }
@@ -182,12 +182,12 @@
     color: #dc2626;
   }
   .page-num {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 900;
     color: #334155;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 1050px) {
     .slide-container { aspect-ratio: auto; }
     .main-grid { grid-template-columns: 1fr; }
   }
@@ -285,7 +285,7 @@
             <span>上海</span>
             <span class="region-count">8 家</span>
           </div>
-          <ul class="company-list" style="gap: 5.5px;">
+          <ul class="company-list" style="gap: 6.5px;">
             <li class="company-item"><span class="company-name">尖點科技<span class="star">*</span></span><span class="badge-listed">上市</span></li>
             <li class="company-item"><span class="company-name">克麗緹娜</span><span class="badge-listed">上市</span></li>
             <li class="company-item"><span class="company-name">莘宇豐硅材<span class="star">*</span></span></li>
@@ -298,12 +298,12 @@
         </div>
 
         <!-- 安徽 (3 家) -->
-        <div style="border-top: 1.5px solid #cbd5e1; padding-top: 6px; margin-top: 4px;">
+        <div style="border-top: 1.5px solid #cbd5e1; padding-top: 8px; margin-top: 4px;">
           <div class="sub-region-title">
             <span>安徽</span>
             <span class="region-count">3 家</span>
           </div>
-          <ul class="company-list" style="gap: 5.5px;">
+          <ul class="company-list" style="gap: 6.5px;">
             <li class="company-item"><span class="company-name">唐盛國際<span class="star">*</span></span></li>
             <li class="company-item"><span class="company-name">安徽長亨表面處理</span><span class="badge-amber">建設中</span></li>
             <li class="company-item"><span class="company-name">安徽愛粵新材料</span><span class="badge-purple">設計中</span></li>
