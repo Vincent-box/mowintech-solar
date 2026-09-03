@@ -26,25 +26,35 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 36px 48px 28px;
+    padding: 32px 48px 24px;
     overflow: hidden;
   }
 
   /* Header */
   .title {
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 900;
     color: #0d9488;
     letter-spacing: -0.5px;
-    margin-bottom: 24px;
+    text-align: center;
+    margin-bottom: 18px;
   }
 
-  /* Grid Layout: 4 Columns */
+  /* Centered and Narrower Grid Layout */
+  .grid-wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    align-items: stretch;
+  }
+
   .main-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1.08fr;
-    gap: 24px;
-    flex: 1;
+    grid-template-columns: repeat(4, 275px);
+    gap: 16px;
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
     align-items: stretch;
   }
 
@@ -52,24 +62,25 @@
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
     border-radius: 10px;
-    padding: 16px 18px;
+    padding: 14px 14px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   }
 
   .region-header {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     color: #b91c1c;
     border-bottom: 2px solid #cbd5e1;
-    padding-bottom: 8px;
-    margin-bottom: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   .region-count {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #64748b;
   }
@@ -79,24 +90,27 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6.5px;
     flex: 1;
     justify-content: space-between;
   }
 
   .company-item {
-    font-size: 15.5px;
+    font-size: 14.5px;
     font-weight: 700;
     color: #1e293b;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    line-height: 1.25;
+    line-height: 1.2;
   }
 
   .company-name {
     display: inline-flex;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .star {
     color: #dc2626;
@@ -109,9 +123,9 @@
     background: #eff6ff;
     color: #1d4ed8;
     border: 1px solid #bfdbfe;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 800;
-    padding: 1px 6px;
+    padding: 1px 5px;
     border-radius: 4px;
     flex-shrink: 0;
   }
@@ -119,9 +133,9 @@
     background: #fffbeb;
     color: #b45309;
     border: 1px solid #fde68a;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 800;
-    padding: 1px 5px;
+    padding: 1px 4px;
     border-radius: 4px;
     flex-shrink: 0;
   }
@@ -129,21 +143,21 @@
     background: #f5f3ff;
     color: #6d28d9;
     border: 1px solid #ddd6fe;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 800;
-    padding: 1px 5px;
+    padding: 1px 4px;
     border-radius: 4px;
     flex-shrink: 0;
   }
 
   /* Sub Region for Col 4 */
   .sub-region-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     color: #b91c1c;
     border-bottom: 2px solid #cbd5e1;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -155,11 +169,15 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1.5px solid #e2e8f0;
-    padding-top: 14px;
-    margin-top: 16px;
+    padding-top: 12px;
+    margin-top: 14px;
+    max-width: 1150px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .footer-note {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 700;
     color: #0d9488;
   }
@@ -167,12 +185,12 @@
     color: #dc2626;
   }
   .page-num {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
     color: #334155;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     .slide-container { aspect-ratio: auto; }
     .main-grid { grid-template-columns: 1fr; }
   }
@@ -185,117 +203,119 @@
   <!-- Header -->
   <h1 class="title">茂偉低碳 安心電站 亞太實績</h1>
 
-  <!-- 4 Columns Grid -->
-  <div class="main-grid">
+  <!-- Centered 4 Columns Grid -->
+  <div class="grid-wrapper">
+    <div class="main-grid">
 
-    <!-- Column 1: 江蘇 1 (14 家) -->
-    <div class="col-box">
-      <div class="region-header">
-        <span>江蘇</span>
-        <span class="region-count">1/3</span>
-      </div>
-      <ul class="company-list">
-        <li class="company-item"><span class="company-name">新萊潔淨<span class="star">*</span></span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">昆達電腦<span class="star">*</span></span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">強新合金一、二期</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">璽達信息</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">雙永自動</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">勛龍智造</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">東煜精機</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">致威電子</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">台衡精密一、二期</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">熱映光電</span><span class="badge-listed">上市</span></li>
-        <li class="company-item"><span class="company-name">金潭佳</span></li>
-        <li class="company-item"><span class="company-name">鐶琪塑膠一、二期</span></li>
-        <li class="company-item"><span class="company-name">旭東機械<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">晨州塑膠<span class="star">*</span></span></li>
-      </ul>
-    </div>
-
-    <!-- Column 2: 江蘇 2 (14 家) -->
-    <div class="col-box">
-      <div class="region-header">
-        <span>江蘇</span>
-        <span class="region-count">2/3</span>
-      </div>
-      <ul class="company-list">
-        <li class="company-item"><span class="company-name">新格五金<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">名威精密<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">多加塑膠</span></li>
-        <li class="company-item"><span class="company-name">普勝科技</span></li>
-        <li class="company-item"><span class="company-name">華水工業</span></li>
-        <li class="company-item"><span class="company-name">正通電子</span></li>
-        <li class="company-item"><span class="company-name">元順印刷</span></li>
-        <li class="company-item"><span class="company-name">復盛運動</span></li>
-        <li class="company-item"><span class="company-name">十全塑膠<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">油機機械</span></li>
-        <li class="company-item"><span class="company-name">雅哥弟<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">百亨光電<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">德大機械</span></li>
-        <li class="company-item"><span class="company-name">正威印刷</span></li>
-      </ul>
-    </div>
-
-    <!-- Column 3: 江蘇 3 (14 家) -->
-    <div class="col-box">
-      <div class="region-header">
-        <span>江蘇</span>
-        <span class="region-count">3/3</span>
-      </div>
-      <ul class="company-list">
-        <li class="company-item"><span class="company-name">珍佳德食品</span></li>
-        <li class="company-item"><span class="company-name">駿峰模具</span></li>
-        <li class="company-item"><span class="company-name">永琪機械</span></li>
-        <li class="company-item"><span class="company-name">華佳紙業</span></li>
-        <li class="company-item"><span class="company-name">歐品電子</span></li>
-        <li class="company-item"><span class="company-name">聯樺包裝<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">禾佳金屬<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">宏芳生物<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">上達精密<span class="star">*</span></span></li>
-        <li class="company-item"><span class="company-name">百岳精密</span></li>
-        <li class="company-item"><span class="company-name">上泰儀器</span></li>
-        <li class="company-item"><span class="company-name">隆騰生物一、二期</span></li>
-        <li class="company-item"><span class="company-name">沃金技術</span></li>
-        <li class="company-item"><span class="company-name">永進機械</span></li>
-      </ul>
-    </div>
-
-    <!-- Column 4: 上海 ＆ 安徽 -->
-    <div class="col-box" style="justify-content: space-between;">
-      
-      <!-- 上海 (8 家) -->
-      <div>
-        <div class="sub-region-title">
-          <span>上海</span>
-          <span class="region-count">8 家</span>
+      <!-- Column 1: 江蘇 1 (14 家) -->
+      <div class="col-box">
+        <div class="region-header">
+          <span>江蘇</span>
+          <span class="region-count">1/3</span>
         </div>
-        <ul class="company-list" style="gap: 6.5px;">
-          <li class="company-item"><span class="company-name">尖點科技<span class="star">*</span></span><span class="badge-listed">上市</span></li>
-          <li class="company-item"><span class="company-name">克麗緹娜</span><span class="badge-listed">上市</span></li>
-          <li class="company-item"><span class="company-name">莘宇豐硅材<span class="star">*</span></span></li>
-          <li class="company-item"><span class="company-name">莘宇豐硅材二期</span><span class="badge-amber">建設中</span></li>
-          <li class="company-item"><span class="company-name">聚彩源</span></li>
-          <li class="company-item"><span class="company-name">聚彩源二期</span><span class="badge-amber">建設中</span></li>
-          <li class="company-item"><span class="company-name">有祥汽配</span></li>
-          <li class="company-item"><span class="company-name">長誼新材料</span></li>
+        <ul class="company-list">
+          <li class="company-item"><span class="company-name">新萊潔淨<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">昆達電腦<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">強新合金一、二期</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">璽達信息</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">雙永自動</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">勛龍智造</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">東煜精機</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">致威電子</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">台衡精密一、二期</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">熱映光電</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">金潭佳</span></li>
+          <li class="company-item"><span class="company-name">鐶琪塑膠一、二期</span></li>
+          <li class="company-item"><span class="company-name">旭東機械<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">晨州塑膠<span class="star">*</span></span></li>
         </ul>
       </div>
 
-      <!-- 安徽 (3 家) -->
-      <div style="border-top: 1.5px solid #cbd5e1; padding-top: 10px; margin-top: 4px;">
-        <div class="sub-region-title">
-          <span>安徽</span>
-          <span class="region-count">3 家</span>
+      <!-- Column 2: 江蘇 2 (14 家) -->
+      <div class="col-box">
+        <div class="region-header">
+          <span>江蘇</span>
+          <span class="region-count">2/3</span>
         </div>
-        <ul class="company-list" style="gap: 6.5px;">
-          <li class="company-item"><span class="company-name">唐盛國際<span class="star">*</span></span></li>
-          <li class="company-item"><span class="company-name">安徽長亨表面處理</span><span class="badge-amber">建設中</span></li>
-          <li class="company-item"><span class="company-name">安徽愛粵新材料</span><span class="badge-purple">設計中</span></li>
+        <ul class="company-list">
+          <li class="company-item"><span class="company-name">新格五金<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">名威精密<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">多加塑膠</span></li>
+          <li class="company-item"><span class="company-name">普勝科技</span></li>
+          <li class="company-item"><span class="company-name">華水工業</span></li>
+          <li class="company-item"><span class="company-name">正通電子</span></li>
+          <li class="company-item"><span class="company-name">元順印刷</span></li>
+          <li class="company-item"><span class="company-name">復盛運動</span></li>
+          <li class="company-item"><span class="company-name">十全塑膠<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">油機機械</span></li>
+          <li class="company-item"><span class="company-name">雅哥弟<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">百亨光電<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">德大機械</span></li>
+          <li class="company-item"><span class="company-name">正威印刷</span></li>
         </ul>
       </div>
 
-    </div>
+      <!-- Column 3: 江蘇 3 (14 家) -->
+      <div class="col-box">
+        <div class="region-header">
+          <span>江蘇</span>
+          <span class="region-count">3/3</span>
+        </div>
+        <ul class="company-list">
+          <li class="company-item"><span class="company-name">珍佳德食品</span></li>
+          <li class="company-item"><span class="company-name">駿峰模具</span></li>
+          <li class="company-item"><span class="company-name">永琪機械</span></li>
+          <li class="company-item"><span class="company-name">華佳紙業</span></li>
+          <li class="company-item"><span class="company-name">歐品電子</span></li>
+          <li class="company-item"><span class="company-name">聯樺包裝<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">禾佳金屬<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">宏芳生物<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">上達精密<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">百岳精密</span></li>
+          <li class="company-item"><span class="company-name">上泰儀器</span></li>
+          <li class="company-item"><span class="company-name">隆騰生物一、二期</span></li>
+          <li class="company-item"><span class="company-name">沃金技術</span></li>
+          <li class="company-item"><span class="company-name">永進機械</span></li>
+        </ul>
+      </div>
 
+      <!-- Column 4: 上海 ＆ 安徽 (11 家) -->
+      <div class="col-box" style="justify-content: space-between;">
+        
+        <!-- 上海 (8 家) -->
+        <div>
+          <div class="sub-region-title">
+            <span>上海</span>
+            <span class="region-count">8 家</span>
+          </div>
+          <ul class="company-list" style="gap: 6.5px;">
+            <li class="company-item"><span class="company-name">尖點科技<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+            <li class="company-item"><span class="company-name">克麗緹娜</span><span class="badge-listed">上市</span></li>
+            <li class="company-item"><span class="company-name">莘宇豐硅材<span class="star">*</span></span></li>
+            <li class="company-item"><span class="company-name">莘宇豐硅材二期</span><span class="badge-amber">建設中</span></li>
+            <li class="company-item"><span class="company-name">聚彩源</span></li>
+            <li class="company-item"><span class="company-name">聚彩源二期</span><span class="badge-amber">建設中</span></li>
+            <li class="company-item"><span class="company-name">有祥汽配</span></li>
+            <li class="company-item"><span class="company-name">長誼新材料</span></li>
+          </ul>
+        </div>
+
+        <!-- 安徽 (3 家) -->
+        <div style="border-top: 1.5px solid #cbd5e1; padding-top: 8px; margin-top: 4px;">
+          <div class="sub-region-title">
+            <span>安徽</span>
+            <span class="region-count">3 家</span>
+          </div>
+          <ul class="company-list" style="gap: 6.5px;">
+            <li class="company-item"><span class="company-name">唐盛國際<span class="star">*</span></span></li>
+            <li class="company-item"><span class="company-name">安徽長亨表面處理</span><span class="badge-amber">建設中</span></li>
+            <li class="company-item"><span class="company-name">安徽愛粵新材料</span><span class="badge-purple">設計中</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
   <!-- Footer -->
