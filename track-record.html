@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>茂偉低碳 · 安心電站 亞太實績 (2026.03)</title>
+<title>茂偉低碳 安心電站 亞太實績202603</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: #0f172a;
-    color: #0f172a;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "PingFang SC", "Microsoft YaHei", sans-serif;
     min-height: 100vh;
     display: flex;
@@ -19,183 +18,115 @@
 
   .slide-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1440px;
     aspect-ratio: 16 / 9;
-    background: #f8fafc;
-    border-radius: 16px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 32px 42px 24px;
+    padding: 36px 48px 28px;
     overflow: hidden;
-    position: relative;
   }
 
   /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 12px;
-  }
-  .brand-sub {
-    font-size: 13px;
-    font-weight: 800;
-    color: #0284c7;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-    display: block;
-  }
-  .title-main {
-    font-size: 28px;
+  .title {
+    font-size: 36px;
     font-weight: 900;
-    color: #0f172a;
+    color: #0d9488;
     letter-spacing: -0.5px;
-  }
-  .title-main span {
-    color: #0284c7;
+    margin-bottom: 24px;
   }
 
-  /* KPI Cards */
-  .kpi-group {
-    display: flex;
-    gap: 12px;
-  }
-  .kpi-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 6px 14px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    min-width: 90px;
-  }
-  .kpi-val {
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1.1;
-  }
-  .kpi-label {
-    font-size: 10.5px;
-    font-weight: 700;
-    color: #64748b;
-    margin-top: 2px;
-  }
-  .kpi-blue .kpi-val { color: #0284c7; }
-  .kpi-rose .kpi-val { color: #e11d48; }
-  .kpi-emerald .kpi-val { color: #059669; }
-
-  /* Main 3 Column Grid */
-  .grid-container {
+  /* Grid Layout: 4 Columns */
+  .main-grid {
     display: grid;
-    grid-template-columns: 1.15fr 1.15fr 0.95fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1.05fr;
+    gap: 24px;
     flex: 1;
     align-items: stretch;
-    margin-bottom: 12px;
   }
 
-  .col-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 16px;
+  .col-box {
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
   }
 
-  .col-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1.5px solid #f1f5f9;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-  }
-  .col-title {
-    font-size: 13.5px;
+  .region-header {
+    font-size: 22px;
     font-weight: 900;
+    color: #b91c1c;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .region-count {
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  /* Company List */
+  .company-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .company-item {
+    font-size: 16px;
+    font-weight: 700;
     color: #1e293b;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: space-between;
+    line-height: 1.25;
   }
-  .col-tag {
-    font-size: 10px;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  .col-tag.blue { background: #e0f2fe; color: #0369a1; }
-  .col-tag.slate { background: #f1f5f9; color: #475569; }
-  .col-tag.emerald { background: #d1fae5; color: #065f46; }
 
-  /* List Grid */
-  .item-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6.5px 8px;
-  }
-  .company-row {
-    display: flex;
+  .company-name {
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #1e293b;
-    white-space: nowrap;
+  }
+  .star {
+    color: #dc2626;
+    font-weight: 900;
+    margin-left: 1px;
   }
 
-  /* Badges */
-  .badge {
-    font-size: 9.5px;
-    font-weight: 800;
-    padding: 1px 4px;
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-  .badge-stock-star {
+  /* Tag */
+  .badge-listed {
     background: #eff6ff;
     color: #1d4ed8;
-    border: 1px solid #93c5fd;
-  }
-  .badge-stock {
-    background: #f0fdf4;
-    color: #15803d;
-    border: 1px solid #86efac;
-  }
-  .badge-star {
-    background: #fef2f2;
-    color: #dc2626;
-    border: 1px solid #fca5a5;
-  }
-  .badge-normal {
-    background: #f8fafc;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #bfdbfe;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
   }
 
-  /* Sub sections in Col 3 */
-  .sub-sec {
+  /* Sub Region for Col 4 */
+  .sub-region-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #b91c1c;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 8px;
     margin-bottom: 10px;
-  }
-  .sub-sec:last-child {
-    margin-bottom: 0;
-  }
-  .sub-head {
-    font-size: 11.5px;
-    font-weight: 800;
-    color: #475569;
-    margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: space-between;
   }
 
   /* Footer */
@@ -203,29 +134,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 8px;
-    font-size: 11px;
-    color: #64748b;
-    font-weight: 600;
+    border-top: 1.5px solid #e2e8f0;
+    padding-top: 14px;
+    margin-top: 16px;
   }
-  .star-note {
-    color: #dc2626;
+  .footer-note {
+    font-size: 14px;
     font-weight: 700;
+    color: #0d9488;
+  }
+  .footer-note span {
+    color: #dc2626;
   }
   .page-num {
-    background: #e2e8f0;
+    font-size: 24px;
+    font-weight: 900;
     color: #334155;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 800;
   }
 
-  /* Print / Screenshot helper */
-  @media (max-width: 900px) {
-    .slide-container { aspect-ratio: auto; height: auto; }
-    .grid-container { grid-template-columns: 1fr; }
+  @media (max-width: 1000px) {
+    .slide-container { aspect-ratio: auto; }
+    .main-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -234,136 +163,121 @@
 <div class="slide-container">
 
   <!-- Header -->
-  <div class="header">
-    <div>
-      <span class="brand-sub">MOWINTECH 茂偉低碳 · 25 年工商業安心電站</span>
-      <h1 class="title-main">亞太實績全景 <span>2026.03</span></h1>
-    </div>
-    <div class="kpi-group">
-      <div class="kpi-card">
-        <div class="kpi-val">47<small style="font-size:12px">+</small></div>
-        <div class="kpi-label">華東標竿企業</div>
-      </div>
-      <div class="kpi-card kpi-blue">
-        <div class="kpi-val">12<small style="font-size:12px">家</small></div>
-        <div class="kpi-label">上市企業背書</div>
-      </div>
-      <div class="kpi-card kpi-rose">
-        <div class="kpi-val">16<small style="font-size:12px">家+</small></div>
-        <div class="kpi-label">★ 台協幹部單位</div>
-      </div>
-      <div class="kpi-card kpi-emerald">
-        <div class="kpi-val">100<small style="font-size:12px">%</small></div>
-        <div class="kpi-label">直營閉環交付</div>
-      </div>
-    </div>
-  </div>
+  <h1 class="title">茂偉低碳 安心電站 亞太實績202603</h1>
 
-  <!-- 3 Columns Content -->
-  <div class="grid-container">
+  <!-- 4 Columns Grid -->
+  <div class="main-grid">
 
-    <!-- Column 1: 江蘇 · 上市與核心 -->
-    <div class="col-card">
+    <!-- Column 1: 江蘇 1 -->
+    <div class="col-box">
+      <div class="region-header">
+        <span>江蘇</span>
+        <span class="region-count">1/3</span>
+      </div>
+      <ul class="company-list">
+        <li class="company-item"><span class="company-name">新萊潔淨<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">昆達電腦<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">璽達信息</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">雙永自動</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">勛龍智造</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">東煜精機</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">致威電子</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">金潭佳</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">台衡精密</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">熱映光電</span><span class="badge-listed">上市</span></li>
+        <li class="company-item"><span class="company-name">環琪塑膠</span></li>
+        <li class="company-item"><span class="company-name">強新合金</span></li>
+        <li class="company-item"><span class="company-name">強新2期</span></li>
+        <li class="company-item"><span class="company-name">旭東機械<span class="star">*</span></span></li>
+      </ul>
+    </div>
+
+    <!-- Column 2: 江蘇 2 -->
+    <div class="col-box">
+      <div class="region-header">
+        <span>江蘇</span>
+        <span class="region-count">2/3</span>
+      </div>
+      <ul class="company-list">
+        <li class="company-item"><span class="company-name">晨州塑膠<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">新格五金<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">名威精密<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">多加塑膠</span></li>
+        <li class="company-item"><span class="company-name">普勝科技</span></li>
+        <li class="company-item"><span class="company-name">華水工業</span></li>
+        <li class="company-item"><span class="company-name">正通電子</span></li>
+        <li class="company-item"><span class="company-name">元順印刷</span></li>
+        <li class="company-item"><span class="company-name">復盛運動</span></li>
+        <li class="company-item"><span class="company-name">十全塑膠<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">油機機械</span></li>
+        <li class="company-item"><span class="company-name">雅哥弟<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">百亨光電<span class="star">*</span></span></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: 江蘇 3 -->
+    <div class="col-box">
+      <div class="region-header">
+        <span>江蘇</span>
+        <span class="region-count">3/3</span>
+      </div>
+      <ul class="company-list">
+        <li class="company-item"><span class="company-name">德大機械</span></li>
+        <li class="company-item"><span class="company-name">正威印刷</span></li>
+        <li class="company-item"><span class="company-name">珍佳德食品</span></li>
+        <li class="company-item"><span class="company-name">駿峰模具</span></li>
+        <li class="company-item"><span class="company-name">永琪機械</span></li>
+        <li class="company-item"><span class="company-name">華佳紙業</span></li>
+        <li class="company-item"><span class="company-name">歐品電子</span></li>
+        <li class="company-item"><span class="company-name">聯樺包裝<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">禾佳金屬<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">宏芳生物<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">上達精密<span class="star">*</span></span></li>
+        <li class="company-item"><span class="company-name">百岳精密</span></li>
+        <li class="company-item"><span class="company-name">上泰儀器</span></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: 上海 ＆ 安徽 -->
+    <div class="col-box" style="justify-content: flex-start; gap: 16px;">
+      
+      <!-- 上海 -->
       <div>
-        <div class="col-header">
-          <div class="col-title">🇨🇳 江蘇 · 蘇州 / 昆山 / 太倉</div>
-          <span class="col-tag blue">台資上市 ＆ 核心</span>
+        <div class="sub-region-title">
+          <span>上海</span>
+          <span class="region-count">6 家</span>
         </div>
-        <div class="item-grid">
-          <div class="company-row"><span class="badge badge-stock-star">上市*</span><span>新萊潔淨</span></div>
-          <div class="company-row"><span class="badge badge-stock-star">上市*</span><span>昆達電腦</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>璽達信息</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>雙永自動</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>勛龍智造</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>東煜精機</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>致威電子</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>金潭佳</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>台衡精密</span></div>
-          <div class="company-row"><span class="badge badge-stock">上市</span><span>熱映光電</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>十全塑膠</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>雅哥弟</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>百亨光電</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>聯樺包裝</span></div>
-        </div>
-      </div>
-      <div style="font-size: 10px; color: #94a3b8; border-top: 1px dashed #e2e8f0; padding-top: 4px; margin-top: 4px;">
-        ★ 上市龍頭與標竿外資首選合作伙伴
-      </div>
-    </div>
-
-    <!-- Column 2: 江蘇 · 知名製造與台協幹部 -->
-    <div class="col-card">
-      <div>
-        <div class="col-header">
-          <div class="col-title">🇨🇳 江蘇 · 精工製造實績</div>
-          <span class="col-tag slate">台協幹部 ＆ 實體工業</span>
-        </div>
-        <div class="item-grid">
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>旭東機械</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>晨州塑膠</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>新格五金</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>名威精密</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>禾佳金屬</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>宏芳生物</span></div>
-          <div class="company-row"><span class="badge badge-star">台協*</span><span>上達精密</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>環琪塑膠</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>強新合金</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>強新 2 期</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>多加塑膠</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>普勝科技</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>元順印刷</span></div>
-          <div class="company-row"><span class="badge badge-normal">台資</span><span>復盛運動</span></div>
-        </div>
-      </div>
-      <div style="font-size: 10.5px; color: #64748b; line-height: 1.4; border-top: 1px dashed #e2e8f0; padding-top: 4px; margin-top: 4px;">
-        其餘標竿：油機機械 · 德大機械 · 正威印刷 · 珍佳德 · 駿峰模具 · 永琪機械 · 華佳紙業 · 歐品電子 · 百岳精密 · 上泰儀器 · 華水工業 · 正通電子
-      </div>
-    </div>
-
-    <!-- Column 3: 上海 ＆ 安徽 -->
-    <div class="col-card">
-      <div>
-        <div class="col-header">
-          <div class="col-title">🇨🇳 上海 ＆ 安徽大區</div>
-          <span class="col-tag emerald">跨省域標竿</span>
-        </div>
-        
-        <!-- 上海 -->
-        <div class="sub-sec">
-          <div class="sub-head">📍 上海（嘉定・松江・浦東・寶山）</div>
-          <div class="item-grid" style="grid-template-columns: 1fr;">
-            <div class="company-row"><span class="badge badge-stock-star">上市*</span><span>尖點科技</span></div>
-            <div class="company-row"><span class="badge badge-stock">上市</span><span>克麗緹娜</span></div>
-            <div class="company-row"><span class="badge badge-star">台協*</span><span>莘宇豐硅材</span></div>
-            <div class="company-row"><span class="badge badge-normal">台資</span><span>聚彩源 · 有祥汽配 · 長誼新材</span></div>
-          </div>
-        </div>
-
-        <!-- 安徽 -->
-        <div class="sub-sec" style="border-top: 1px solid #f1f5f9; padding-top: 8px;">
-          <div class="sub-head">📍 安徽（馬鞍山）</div>
-          <div class="item-grid" style="grid-template-columns: 1fr;">
-            <div class="company-row"><span class="badge badge-star">台協*</span><span>唐盛國際</span></div>
-          </div>
-        </div>
+        <ul class="company-list" style="gap: 8px;">
+          <li class="company-item"><span class="company-name">尖點科技<span class="star">*</span></span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">克麗緹娜</span><span class="badge-listed">上市</span></li>
+          <li class="company-item"><span class="company-name">莘宇豐硅材<span class="star">*</span></span></li>
+          <li class="company-item"><span class="company-name">聚彩源</span></li>
+          <li class="company-item"><span class="company-name">有祥汽配</span></li>
+          <li class="company-item"><span class="company-name">長誼新材料</span></li>
+        </ul>
       </div>
 
-      <div style="font-size: 10px; color: #059669; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 4px 8px; text-align: center; font-weight: 700;">
-        🛡️ 茂偉低碳：華東全直營施工 · 25 年不轉包
+      <!-- 安徽 -->
+      <div style="border-top: 1.5px solid #cbd5e1; padding-top: 12px; margin-top: 4px;">
+        <div class="sub-region-title">
+          <span>安徽</span>
+          <span class="region-count">1 家</span>
+        </div>
+        <ul class="company-list">
+          <li class="company-item"><span class="company-name">唐盛國際<span class="star">*</span></span></li>
+        </ul>
       </div>
+
     </div>
 
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    <div>
-      <span class="star-note">★ 說明：</span>標註「*」代表該企業負責人擔任當地台商協會會長或常務理監事單位（累計達 16 家以上）。
+    <div class="footer-note">
+      說明：<span>“*”</span>台商協會會長與理監事單位，達16家以上
     </div>
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <span>茂偉低碳工商業決策學院</span>
-      <span class="page-num">第 24 頁</span>
-    </div>
+    <div class="page-num">24</div>
   </div>
 
 </div>
