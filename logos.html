@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>茂偉低碳 · 標竿客戶品牌 Logo 實績</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f172a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .slide-container {
+    width: 100%;
+    max-width: 1440px;
+    aspect-ratio: 16 / 9;
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 36px 20px;
+    overflow: hidden;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #e2e8f0;
+  }
+  .header-left .brand-tag {
+    font-size: 11px;
+    font-weight: 800;
+    color: #0d9488;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .header-left .title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .stat-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .header-right .stat-desc {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  /* 7x4 Grid Matrix */
+  .grid-matrix {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 12px;
+    flex: 1;
+    margin-bottom: 14px;
+  }
+
+  .logo-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 10px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .logo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+  }
+
+  .logo-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 2px;
+  }
+  .logo-wrapper img {
+    max-width: 100%;
+    max-height: 52px;
+    object-fit: contain;
+  }
+
+  .company-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .star {
+    color: #dc2626;
+    font-weight: 900;
+  }
+  .badge-listed {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    font-size: 8.5px;
+    font-weight: 800;
+    padding: 0px 3px;
+    border-radius: 3px;
+  }
+
+  /* Stat / Summary Cards */
+  .summary-card-blue {
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+  .summary-card-blue .num {
+    font-size: 24px;
+    font-weight: 900;
+    color: #1d4ed8;
+    line-height: 1;
+  }
+  .summary-card-blue .txt {
+    font-size: 11px;
+    font-weight: 800;
+    color: #1e40af;
+    margin-top: 4px;
+  }
+
+  .summary-card-teal {
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+  .summary-card-teal .num {
+    font-size: 24px;
+    font-weight: 900;
+    color: #0d9488;
+    line-height: 1;
+  }
+  .summary-card-teal .txt {
+    font-size: 11px;
+    font-weight: 800;
+    color: #0f766e;
+    margin-top: 4px;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid #e2e8f0;
+    padding-top: 8px;
+  }
+  .footer-note {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+  }
+  .footer-note span {
+    color: #dc2626;
+    font-weight: 800;
+  }
+  .page-num {
+    font-size: 18px;
+    font-weight: 900;
+    color: #334155;
+  }
+
+  @media (max-width: 1000px) {
+    .slide-container { aspect-ratio: auto; }
+    .grid-matrix { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="brand-tag">MOWINTECH 茂偉低碳 · 25 年安心電站全生命週期服務</div>
+      <h1 class="title">標竿客戶實績 · 客戶品牌 Logo 集合</h1>
+    </div>
+    <div class="header-right">
+      <div class="stat-title">已核驗 26 家代表性品牌</div>
+      <div class="stat-desc">涵蓋 10 家上市企業 · 7 家台協幹部單位</div>
+    </div>
+  </div>
+
+  <!-- 7x4 Grid Matrix (26 Logos + 2 Stats) -->
+  <div class="grid-matrix">
+
+    <!-- Row 1: 上市企業龍頭 -->
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/01_新萊潔淨.png" alt="新萊潔淨"></div>
+      <div class="company-label">新萊潔淨<span class="star">*</span> <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/02_昆達電腦.png" alt="昆達電腦"></div>
+      <div class="company-label">昆達電腦<span class="star">*</span> <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/06_強新合金.png" alt="強新合金"></div>
+      <div class="company-label">強新合金 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/41_尖點科技.png" alt="尖點科技"></div>
+      <div class="company-label">尖點科技<span class="star">*</span> <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/42_克麗緹娜.png" alt="克麗緹娜"></div>
+      <div class="company-label">克麗緹娜 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/18_勛龍智造.png" alt="勛龍智造"></div>
+      <div class="company-label">勛龍智造 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/19_東煜精機.png" alt="東煜精機"></div>
+      <div class="company-label">東煜精機 <span class="badge-listed">上市</span></div>
+    </div>
+
+    <!-- Row 2: 上市企業 & 標竿製造 -->
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/20_致威電子.png" alt="致威電子"></div>
+      <div class="company-label">致威電子 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/22_台衡精密.png" alt="台衡精密"></div>
+      <div class="company-label">台衡精密 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/23_熱映光電.png" alt="熱映光電"></div>
+      <div class="company-label">熱映光電 <span class="badge-listed">上市</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/21_金潭佳.png" alt="金潭佳"></div>
+      <div class="company-label">金潭佳</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/05_鐶琪塑膠.png" alt="鐶琪塑膠"></div>
+      <div class="company-label">鐶琪塑膠</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/08_旭東機械.png" alt="旭東機械"></div>
+      <div class="company-label">旭東機械<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/09_晨州塑膠.png" alt="晨州塑膠"></div>
+      <div class="company-label">晨州塑膠<span class="star">*</span></div>
+    </div>
+
+    <!-- Row 3: 台協幹部企業 & 龍頭廠商 -->
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/24_十全塑膠.png" alt="十全塑膠"></div>
+      <div class="company-label">十全塑膠<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/26_雅哥弟.png" alt="雅哥弟"></div>
+      <div class="company-label">雅哥弟<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/27_百亨光電.png" alt="百亨光電"></div>
+      <div class="company-label">百亨光電<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/38_上達精密.png" alt="上達精密"></div>
+      <div class="company-label">上達精密<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/37_宏芳生物.png" alt="宏芳生物"></div>
+      <div class="company-label">宏芳生物<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/47_唐盛國際.png" alt="唐盛國際"></div>
+      <div class="company-label">唐盛國際<span class="star">*</span></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/25_油機機械.png" alt="油機機械"></div>
+      <div class="company-label">油機機械</div>
+    </div>
+
+    <!-- Row 4: 精密工業 & 實績數據 -->
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/28_德大機械.png" alt="德大機械"></div>
+      <div class="company-label">德大機械</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/29_正威印刷.png" alt="正威印刷"></div>
+      <div class="company-label">正威印刷</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/17_復盛運動.png" alt="復盛運動"></div>
+      <div class="company-label">復盛運動</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/15_正通電子.png" alt="正通電子"></div>
+      <div class="company-label">正通電子</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-wrapper"><img src="./assets/logos/40_上泰儀器.png" alt="上泰儀器"></div>
+      <div class="company-label">上泰儀器</div>
+    </div>
+    <div class="summary-card-blue">
+      <div class="num">12 家</div>
+      <div class="txt">上市企業背書指定</div>
+    </div>
+    <div class="summary-card-teal">
+      <div class="num">53+ 家</div>
+      <div class="txt">華東標竿安心電站</div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-note">
+      說明：<span>“*”</span> 台商協會會長與理監事單位，達 16 家以上 ｜ 標註 <b>[上市]</b> 為上市/掛牌企業 ｜ 其餘標竿客戶依合約陸續收錄
+    </div>
+    <div class="page-num">25</div>
+  </div>
+
+</div>
+
+</body>
+</html>
